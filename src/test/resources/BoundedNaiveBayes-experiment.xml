@@ -1,0 +1,67 @@
+
+<experiment output="output">
+
+	<title>Naive Bayes Test</title>
+
+	<description>
+	    This experiment is a simple test-case for the Naive Bayes implementation.
+	</description>
+
+<!-- 
+	<Stream name="input" class="stream.io.CsvStream"
+		    url="classpath:/multi-golf.csv.gz" />
+	<Stream name="input" class="stream.io.CsvStream"
+		    url="http://shuttle/data/generic_data_1000values.csv" />
+ -->
+<!-- 
+	<Stream name="input" class="stream.io.CsvStream"
+		    url="http://kirmes.cs.uni-dortmund.de/data/nominal/generic_data_1000values.csv" />
+	<Stream name="input" class="stream.io.ArffStream"
+		    url="http://kirmes.cs.uni-dortmund.de/data/sea-stream.arff" />
+ -->		    
+
+	<Stream name="input" class="stream.io.CsvStream"
+		    url="file:///Users/chris/easy-gaussian-data.csv" />
+
+
+	<settings>
+		<property name="labelAttribute" value="label" />
+		<property name="plotInterval" value="5" />
+		<property name="limit" value="50000" />
+		<property name="updatePlots" value="false" />
+		<property name="laplaceCorrection" value="0.0001" />
+	</settings>
+<!-- 
+ -->
+	<processing>
+		<processor class="stream.data.mapper.AttributeFilter" include="(att3|label)" />
+		<processor class="stream.data.mapper.KeyMapper" old="class" new="label" />
+		<processor class="stream.data.mapper.NumericalBinning" minimum="0.0" maximum="10.0" bins="10000" />
+	</processing>
+
+	<TestAndTrain input="input" class="stream.eval.PredictionError" testInterval="1">
+		<!-- 
+		<Baseline class="stream.learner.LabelPredictor" />
+		<Learner name="HoeffdingTree" class="stream.learner.tree.HoeffdingTree" />
+		<Learner name="Random" class="stream.learner.RandomClassifier" />
+		 -->
+		<Learner name="NaiveBayes" class="stream.learner.NaiveBayes" />
+		<Learner name="BoundedBayes" class="stream.learner.BoundedBayes" limit="100" />
+<!-- 
+ -->
+ 		<Learner name="LossyBayes" class="stream.learner.LossyBayes" epsilon="0.005" />
+		<Learner name="TopKBayes" class="stream.learner.TopKBayes" k="100" />
+		<!-- 
+		 -->
+		<Learner name="StickyBayes" class="stream.learner.StickySamplingBayes" support="0.1" error="0.1" probabilityOfFailure="0.1" />
+
+		<Statistics key="test.error">
+			<StatisticsWriter file="model-error.dat" />			
+		</Statistics>
+		
+		<Statistics key="test.memory">
+			<StatisticsWriter file="memory.dat" />
+		</Statistics>
+
+	</TestAndTrain>
+</experiment>

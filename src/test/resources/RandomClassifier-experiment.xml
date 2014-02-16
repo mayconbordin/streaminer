@@ -1,0 +1,28 @@
+
+<experiment output="output">
+
+	<title>Random Classifier Test</title>
+
+	<description>
+	    This experiment is a simple test-case for the Random Classifier implementation.
+	</description>
+
+
+		    <!--  url="classpath:/multi-golf.csv" -->
+	<Stream name="input" class="stream.io.CsvStream"
+		    url="http://kirmes.cs.uni-dortmund.de/data/mushrooms-shuffled.csv" 
+		    />
+
+	<settings>
+		<property name="labelAttribute" value="_class" />
+	</settings>
+
+	<TestAndTrain input="input" class="stream.eval.PredictionError" testInterval="1">
+
+		<Learner name="Random" class="stream.learner.RandomClassifier" />
+		<Learner name="NaiveBayes" class="stream.learner.NaiveBayes" />
+
+		<Plot title="Memory Usage" name="memory.png" />
+		<Plot title="Model Error" name="model-error.png" />
+	</TestAndTrain>
+</experiment>

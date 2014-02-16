@@ -1,0 +1,19 @@
+<Stream class="stream.generator.LabeledGaussianStream">
+  <Class name="positive" weight="0.25137770241627805">
+    <Attribute name="attr0" class="stream.generator.Gaussian" mean="-4.44" variance="1.0" />
+    <Attribute name="attr1" class="stream.generator.Gaussian" mean="6.02" variance="1.0" />
+    <Attribute name="attr2" class="stream.generator.Gaussian" mean="0.0" variance="3.15" />
+  </Class>
+
+  <Class name="negative" weight="0.42390843577787196">
+    <Attribute name="attr0" class="stream.generator.Gaussian" mean="5.33" variance="2.78" />
+    <Attribute name="attr1" class="stream.generator.Gaussian" mean="0.0" variance="3.33" />
+    <Attribute name="attr2" class="stream.generator.Gaussian" mean="3.46" variance="2.04" />
+  </Class>
+
+  <Class name="Class_1302682265226" weight="0.3247138618058499">
+    <Attribute name="attr0" class="stream.generator.Gaussian" mean="0.0" variance="1.0" />
+    <Attribute name="attr1" class="stream.generator.Gaussian" mean="-3.26" variance="1.0" />
+    <Attribute name="attr2" class="stream.generator.Gaussian" mean="0.0" variance="1.0" />
+  </Class>
+</Stream>

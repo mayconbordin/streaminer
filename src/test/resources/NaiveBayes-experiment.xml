@@ -1,0 +1,77 @@
+
+<experiment output="output">
+
+	<title>Naive Bayes Test</title>
+
+	<description>
+		This experiment is a simple test-case for the Naive Bayes implementation.
+	</description>
+
+
+	<!--
+		<Stream name="pilze" class="stream.io.CsvStream"
+		url="http://kirmes.cs.uni-dortmund.de/data/mushrooms-shuffled.csv" />
+		url="classpath:/multi-golf.csv.gz" />
+	-->
+	<!-- 
+	<Stream name="input" class="stream.io.CsvStream"
+		url="file:///Users/chris/biased-gaussian-data_ratio_0.0010.csv" />
+			  -->
+
+
+	<Stream name="input" class="stream.generator.LabeledGaussianStream" bias="0.001" seed="2001">
+		<Class name="legal">
+			<Attribute name="att1" class="stream.generator.Gaussian" mean="6.0" variance="2.8" />
+			<Attribute name="att2" class="stream.generator.Gaussian" mean="3.0" variance="3.8" />
+		</Class>
+
+		<Class name="attack">
+			<Attribute name="att1" class="stream.generator.Gaussian" mean="0.4" variance="1.0" />
+			<Attribute name="att2" class="stream.generator.Gaussian" mean="8.0" variance="0.25" />
+		</Class>
+	</Stream>
+
+	<processing>
+	<!-- 
+	 -->
+		<processor class="stream.data.mapper.NumericalBinning"
+			minimum="-20.0" maximum="20.0" bins="1000" />
+		<processor class="stream.data.mapper.KeyMapper" old="label"
+			new="_class" />
+	</processing>
+
+	<settings>
+		<property name="labelAttribute" value="_class" />
+		<property name="windowSize" value="1000" />
+		<property name="limit" value="50000" />
+	</settings>
+
+	<TestAndTrain input="input" class="stream.eval.PredictionError"
+		testInterval="1">
+		<!--
+			<Baseline class="stream.learner.LabelPredictor" /> <Learner
+			class="stream.learner.RandomClassifier" /> <Learner
+			class="stream.learner.LossyBayes" epsilon="0.1" />
+		-->
+		<!-- 
+		<Learner class="stream.learner.Perceptron" />
+		 -->
+		<Learner name="NaiveBayes" class="stream.learner.NaiveBayes" />
+		<Learner class="stream.learner.MajorityClass" />
+		<Learner name="NB_WOP" class="stream.learner.NaiveBayes" wop="true" />
+		<Learner class="stream.learner.TopKBayes" wop="true" k="175" />
+		<!-- 
+		 -->
+		 
+		 <Test class="stream.eval.PredictionError">
+		 	<Plot title="Model Error" name="model-error-plot.png" />
+		 </Test>
+		 
+		 <Test class="stream.eval.MemoryUsage">
+		 	<Plot title="Memory Usage" name="mem-usage-plot.png" />
+		 </Test>
+
+		<Plot title="Memory Usage" name="memory.png" />
+		<Plot title="Model Error" name="model-error.png" />
+	</TestAndTrain>
+</experiment>

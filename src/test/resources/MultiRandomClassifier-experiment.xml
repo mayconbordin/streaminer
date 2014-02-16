@@ -1,0 +1,42 @@
+
+<experiment output="output">
+
+	<title>Random Classifier Test</title>
+
+	<description>
+	    This experiment is a simple test-case for the Random Classifier implementation.
+	</description>
+
+
+		    <!--  url="classpath:/multi-golf.csv" -->
+		    <!-- 
+	<Stream name="input" class="stream.io.CsvStream"
+		    url="http://kirmes.cs.uni-dortmund.de/data/mushrooms-shuffled.csv" />
+
+		     -->
+	<Stream name="input" class="stream.io.AccessLogStream"
+		    url="http://kirmes.cs.uni-dortmund.de/data/logs/jwall-access.log" />
+<!-- 
+ -->
+	<processing>
+		<processor class="stream.data.mapper.AttributeFilter" include="REQUEST.*" exclude="(__.*|REQUEST_HEADERS_NAMES|REQUEST_HEADERS?|REQUEST_BODY)" />
+	</processing>
+
+	<settings>
+		<property name="labelAttribute" value="_class" />
+	</settings>
+
+	<TestAndTrain input="input" class="stream.eval.MultiPredictionError" testInterval="1">
+<!-- 
+		<Baseline class="stream.learner.MultiLabelPredictor" />
+ -->
+		<Learner name="Random" class="stream.learner.MultiRandomClassifier" />
+		<Learner name="MultiBayes" class="stream.learner.MultiBayes" />
+		<Learner name="MultiLossyBayes" class="stream.learner.MultiLossyBayes" epsilon="0.05" />
+		<!-- 
+		 -->
+
+		<Plot title="Memory Usage" name="memory.png" />
+		<Plot title="Model Error" name="model-error.png" />
+	</TestAndTrain>
+</experiment>

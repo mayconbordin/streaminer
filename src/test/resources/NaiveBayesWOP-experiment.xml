@@ -1,0 +1,45 @@
+
+<experiment output="output">
+
+	<title>Naive Bayes Test</title>
+
+	<description>
+	    This experiment is a simple test-case for the Naive Bayes implementation.
+	</description>
+
+
+			<!-- 
+	<Stream name="input" class="stream.io.CsvStream"
+			url="http://kirmes.cs.uni-dortmund.de/data/mushrooms-shuffled.csv" />
+		    url="classpath:/multi-golf.csv.gz" />
+
+			 -->
+	<Stream name="input" class="stream.io.CsvStream"
+			url="file:///Users/chris/biased-gaussian-data.csv" />
+
+	<processing>
+		<processor class="stream.data.mapper.NumericalBinning" minimum="0.0" maximum="10.0" bins="1000" />
+	</processing>
+
+	<settings>
+		<property name="labelAttribute" value="label" />
+		<property name="windowSize" value="1000" />
+		<property name="limit" value="100000" />
+	</settings>
+
+	<TestAndTrain input="input" class="stream.eval.PredictionError" testInterval="1">
+		<!-- 
+		<Baseline class="stream.learner.LabelPredictor" />
+		<Learner class="stream.learner.RandomClassifier" />
+		<Learner class="stream.learner.LossyBayes" epsilon="0.1" />
+		 -->
+		<Learner class="stream.learner.Perceptron" />
+		<Learner class="stream.learner.MajorityClass" />
+		<Learner class="stream.learner.NaiveBayes" />
+		<Learner class="stream.learner.NaiveBayesWOP" />
+		<Learner class="stream.learner.TopKBayes" k="175" />
+
+		<Plot title="Memory Usage" name="memory.png" />
+		<Plot title="Model Error" name="model-error.png" />
+	</TestAndTrain>
+</experiment>
