@@ -5,7 +5,14 @@ import org.streaminer.util.ArrayUtils;
 import org.streaminer.util.hash.HashUtils;
 
 /**
- *
+ * "Tug of War" sketches due to Alon, Matias and Szegedy 96, and Alon, Gibbons,
+ * Matias and Szegedy, 99.  Some hashing tricks used for faster implementation. 
+ * They support: returning point estimates, approximating inner-products, 
+ * estimating the L2 norm of a vector.
+ * 
+ * Using pairwise hash functions to speed up updates, Graham Cormode 2003
+ * Original implementation: http://www.cs.rutgers.edu/~muthu/massdal-code-index.html
+ * 
  * @author Maycon Viana Bordin <mayconbordin@gmail.com>
  */
 public class AMSSketch implements ISimpleFrequency<Long>, Comparable<AMSSketch> {
