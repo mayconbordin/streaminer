@@ -46,6 +46,8 @@ long freq = counter.estimateCount(item);
 System.out.println(item + ": " + freq);
 ```
 
+---
+
 ## Top-K
 
 ### Algorithms
@@ -72,6 +74,8 @@ for (CountEntry<String> item : topk) {
     System.out.println(item);
 }
 ```
+
+---
 
 ## Quantiles
 
@@ -111,6 +115,8 @@ for (double q : quantiles) {
 }
 ```
 
+---
+
 ## Cardinality
 
 ### Algorithms
@@ -133,6 +139,8 @@ for (int i=0; i<100; i++) {
 
 System.out.println("Cardinality: " + card.cardinality());
 ```
+
+---
 
 ## Average
 
