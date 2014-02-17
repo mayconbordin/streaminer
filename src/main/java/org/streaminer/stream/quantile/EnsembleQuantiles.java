@@ -9,6 +9,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
+/**
+ * Source code: <https://bitbucket.org/cbockermann/stream-mining>.
+ */
 public class EnsembleQuantiles implements IQuantiles<Double> {
     private GKQuantiles activeBlock;
     private LinkedList<Double> sampleBlock;

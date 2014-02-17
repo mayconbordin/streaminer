@@ -17,10 +17,8 @@
 package org.streaminer.stream.cardinality;
 
 @SuppressWarnings("serial")
-public abstract class CardinalityMergeException extends Exception
-{
-    public CardinalityMergeException(String message)
-    {
+public abstract class CardinalityMergeException extends Exception {
+    public CardinalityMergeException(String message) {
         super(message);
     }
 }

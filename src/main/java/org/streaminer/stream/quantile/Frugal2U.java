@@ -10,7 +10,7 @@ import java.util.Random;
  *    Estimating Quantiles." Space-Efficient Data Structures, Streams, and
  *    Algorithms. Springer Berlin Heidelberg, 2013. 77-96.
  * 
- * Adapted from: https://github.com/dgryski/go-frugal
+ * Original code: <https://github.com/dgryski/go-frugal>
  * More info: http://blog.aggregateknowledge.com/2013/09/16/sketch-of-the-day-frugal-streaming/
  * 
  * @author Maycon Viana Bordin <mayconbordin@gmail.com>

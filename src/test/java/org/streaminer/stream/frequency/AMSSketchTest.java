@@ -26,9 +26,9 @@ public class AMSSketchTest {
         int n = 1048575;
         int range = 12345;
         
-        zipf = new ZipfDistribution(0.8, n, range);
+        //zipf = new ZipfDistribution(0.8, n, range);
         AMSSketch sketch = new AMSSketch(5, 512);
-        
+        /*
         int[] exact  = new int[n+1];
         long[] stream = new long[range+1];
         
@@ -53,7 +53,13 @@ public class AMSSketchTest {
                 distinct++;
             }
         }
+        */
+        StreamGenerator gen = new StreamGenerator(0.8, n, range);
+        gen.generate();
+        gen.exact();
         
+        long[] stream = gen.stream;
+        long sumsq = gen.sumsq;
         
         for (int i=1; i<=range; i++) 
             if (stream[i]>0)

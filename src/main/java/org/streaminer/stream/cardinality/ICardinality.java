@@ -18,9 +18,10 @@ package org.streaminer.stream.cardinality;
 
 import java.io.IOException;
 
-
-public interface ICardinality
-{
+/**
+ * Interface for algorithms that calculate the cardinality over a data stream.
+ */
+public interface ICardinality {
     /**
      * @param o stream element
      * @return false if the value returned by cardinality() is unaffected by the appearance of o in the stream.
@@ -66,6 +67,7 @@ public interface ICardinality
      * Nor this estimator nor the one passed as parameters are modified.
      *
      * @param estimators Zero or more compatible estimators
+     * @return The merged data structure
      * @throws CardinalityMergeException If at least one of the estimators is not compatible with this one
      */
     ICardinality merge(ICardinality... estimators) throws CardinalityMergeException;

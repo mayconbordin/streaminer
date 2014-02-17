@@ -32,8 +32,7 @@ import org.streaminer.util.IBuilder;
  * TODO: use 5 bits/bucket instead of 8 (37.5% size reduction)<br/>
  * TODO: super-LogLog optimizations
  */
-public class AdaptiveCounting extends LogLog
-{
+public class AdaptiveCounting extends LogLog {
     /**
      * Number of empty buckets
      */
@@ -44,38 +43,31 @@ public class AdaptiveCounting extends LogLog
      */
     protected final double B_s = 0.051;
 
-    public AdaptiveCounting(int k)
-    {
+    public AdaptiveCounting(int k) {
         super(k);
         b_e = m;
     }
 
-    public AdaptiveCounting(byte[] M)
-    {
+    public AdaptiveCounting(byte[] M) {
         super(M);
 
-        for (byte b : M)
-        {
-            if (b == 0)
-            {
+        for (byte b : M) {
+            if (b == 0) {
                 b_e++;
             }
         }
     }
 
     @Override
-    public boolean offer(Object o)
-    {
+    public boolean offer(Object o) {
         boolean modified = false;
 
         long x = Lookup3Hash.lookup3ycs64(o.toString());
         int j = (int) (x >>> (Long.SIZE - k));
         byte r = (byte) (Long.numberOfLeadingZeros((x << k) | (1 << (k - 1))) + 1);
-        if (M[j] < r)
-        {
+        if (M[j] < r) {
             Rsum += r - M[j];
-            if (M[j] == 0)
-            {
+            if (M[j] == 0) {
                 b_e--;
             }
             M[j] = r;
@@ -86,11 +78,9 @@ public class AdaptiveCounting extends LogLog
     }
 
     @Override
-    public long cardinality()
-    {
+    public long cardinality() {
         double B = (b_e / (double) m);
-        if (B >= B_s)
-        {
+        if (B >= B_s) {
             return (long) Math.round(-m * Math.log(B));
         }
 
@@ -101,20 +91,21 @@ public class AdaptiveCounting extends LogLog
     /**
      * Computes the position of the first set bit of the last Long.SIZE-k bits
      *
+     * @param x
+     * @param k
      * @return Long.SIZE-k if the last k bits are all zero
      */
-    protected static byte rho(long x, int k)
-    {
+    protected static byte rho(long x, int k) {
         return (byte) (Long.numberOfLeadingZeros((x << k) | (1 << (k - 1))) + 1);
     }
 
     /**
+     * @param estimators The estimators to be merged
      * @return this if estimators is null or no arguments are passed
      * @throws LogLogMergeException if estimators are not mergeable (all estimators must be instances of LogLog of the same size)
      */
     @Override
-    public ICardinality merge(ICardinality... estimators) throws LogLogMergeException
-    {
+    public ICardinality merge(ICardinality... estimators) throws LogLogMergeException {
         LogLog res = (LogLog) super.merge(estimators);
         return new AdaptiveCounting(res.M);
     }
@@ -126,40 +117,32 @@ public class AdaptiveCounting extends LogLog
      * @return merged estimator or null if no estimators were provided
      * @throws LogLogMergeException if estimators are not mergeable (all estimators must be the same size)
      */
-    public static AdaptiveCounting mergeEstimators(LogLog... estimators) throws LogLogMergeException
-    {
-        if (estimators == null || estimators.length == 0)
-        {
+    public static AdaptiveCounting mergeEstimators(LogLog... estimators) throws LogLogMergeException {
+        if (estimators == null || estimators.length == 0) {
             return null;
         }
         return (AdaptiveCounting) estimators[0].merge(Arrays.copyOfRange(estimators, 1, estimators.length));
     }
 
-    public static class Builder implements IBuilder<ICardinality>, Serializable
-    {
+    public static class Builder implements IBuilder<ICardinality>, Serializable {
         private static final long serialVersionUID = 2205437102378081334L;
-
         protected final int k;
 
-        public Builder()
-        {
+        public Builder() {
             this(16);
         }
 
-        public Builder(int k)
-        {
+        public Builder(int k) {
             this.k = k;
         }
 
         @Override
-        public AdaptiveCounting build()
-        {
+        public AdaptiveCounting build() {
             return new AdaptiveCounting(k);
         }
 
         @Override
-        public int sizeof()
-        {
+        public int sizeof() {
             return 1 << k;
         }
 
@@ -177,18 +160,16 @@ public class AdaptiveCounting extends LogLog
          * </p>
          *
          * @param maxCardinality
+         * @return Returns a Builder according to the maxCardinality
          * @throws IllegalArgumentException if maxCardinality is not a positive integer
          * @see LinearCounting.Builder#onePercentError(int)
          */
-        public static IBuilder<ICardinality> obyCount(long maxCardinality)
-        {
-            if (maxCardinality <= 0)
-            {
+        public static IBuilder<ICardinality> obyCount(long maxCardinality) {
+            if (maxCardinality <= 0) {
                 throw new IllegalArgumentException("maxCardinality (" + maxCardinality + ") must be a positive integer");
             }
 
-            if (maxCardinality < 4250000)
-            {
+            if (maxCardinality < 4250000) {
                 return LinearCounting.Builder.onePercentError((int) maxCardinality);
             }
 
