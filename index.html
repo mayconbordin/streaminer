@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Streaminer by mayconbordin</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Streaminer</h1>
+        <p>A collection of algorithms for mining data streams</p>
+
+        <p class="view"><a href="https://github.com/mayconbordin/streaminer">View the Project on GitHub <small>mayconbordin/streaminer</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/mayconbordin/streaminer/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/mayconbordin/streaminer/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/mayconbordin/streaminer">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="streaminer" class="anchor" href="#streaminer"><span class="octicon octicon-link"></span></a>Streaminer</h1>
+
+<p>A collection of algorithms for mining data streams, including frequent itemsets, quantiles, sampling, moving averages, set membership and cardinality.</p>
+
+<h2>
+<a name="frequent-itemsets" class="anchor" href="#frequent-itemsets"><span class="octicon octicon-link"></span></a>Frequent Itemsets</h2>
+
+<h3>
+<a name="algorithms" class="anchor" href="#algorithms"><span class="octicon octicon-link"></span></a>Algorithms</h3>
+
+<ul>
+<li>CountSketch <a href="#ref1">[1]</a>
+</li>
+<li>CountMinSketch <a href="#ref2">[2]</a>
+</li>
+<li>LossyCounting <a href="#ref3">[3]</a>
+</li>
+<li>Majority <a href="#ref4">[4]</a>
+</li>
+<li>MisraGries <a href="#ref5">[5]</a>
+</li>
+<li>SpaceSaving <a href="#ref6">[6]</a>
+</li>
+<li>StickySampling <a href="#ref3">[3]</a>
+</li>
+<li>RealCounting</li>
+<li>SimpleTopKCounting</li>
+</ul><h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>Except for the <code>CountMinSketchAlt</code> class, all algorithms implement the <code>IRichFrequency</code> interface. Here's an example using the <code>SpaceSaving</code> algorithm:</p>
+
+<div class="highlight highlight-java"><pre><span class="n">Random</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">counters</span> <span class="o">=</span> <span class="mi">20</span><span class="o">;</span>
+<span class="kt">double</span> <span class="n">support</span> <span class="o">=</span> <span class="mf">0.01</span><span class="o">;</span>
+<span class="kt">double</span> <span class="n">maxError</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">;</span>
+
+<span class="n">IRichFrequency</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">counter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpaceSaving</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;(</span><span class="n">counters</span><span class="o">,</span> <span class="n">support</span><span class="o">,</span> <span class="n">maxError</span><span class="o">);</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">1000</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">counter</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">r</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">100</span><span class="o">),</span> <span class="mi">1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">// get the top 10 items</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">CountEntry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">topk</span> <span class="o">=</span> <span class="n">counter</span><span class="o">.</span><span class="na">peek</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+
+<span class="c1">// print the items</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">CountEntry</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">item</span> <span class="o">:</span> <span class="n">topk</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="c1">// get the frequency of a single item</span>
+<span class="kt">int</span> <span class="n">item</span> <span class="o">=</span> <span class="mi">25</span><span class="o">;</span>
+<span class="kt">long</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">counter</span><span class="o">.</span><span class="na">estimateCount</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">item</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">freq</span><span class="o">);</span>
+</pre></div>
+
+<hr><h2>
+<a name="top-k" class="anchor" href="#top-k"><span class="octicon octicon-link"></span></a>Top-K</h2>
+
+<h3>
+<a name="algorithms-1" class="anchor" href="#algorithms-1"><span class="octicon octicon-link"></span></a>Algorithms</h3>
+
+<ul>
+<li>StreamSummary <a href="#ref6">[6]</a>
+</li>
+<li>ConcurrentStreamSummary</li>
+<li>Frequent</li>
+<li>StochasticTopper</li>
+</ul><h3>
+<a name="usage-1" class="anchor" href="#usage-1"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>The basic usage of a Top-K algorithm is basically the same as the frequent itemset, except that these algorithms do not support the <code>estimateCount</code> method.</p>
+
+<div class="highlight highlight-java"><pre><span class="n">ITopK</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">counter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StreamSummary</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;(</span><span class="mi">3</span><span class="o">);</span>
+
+<span class="n">String</span><span class="o">[]</span> <span class="n">stream</span> <span class="o">=</span> <span class="o">{</span><span class="s">"X"</span><span class="o">,</span> <span class="s">"X"</span><span class="o">,</span> <span class="s">"Y"</span><span class="o">,</span> <span class="s">"Z"</span><span class="o">,</span> <span class="s">"A"</span><span class="o">,</span> <span class="s">"B"</span><span class="o">,</span> <span class="s">"C"</span><span class="o">,</span> <span class="s">"X"</span><span class="o">,</span> <span class="s">"X"</span><span class="o">,</span> <span class="s">"A"</span><span class="o">,</span> <span class="s">"C"</span><span class="o">,</span> <span class="s">"A"</span><span class="o">,</span> <span class="s">"A"</span><span class="o">};</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">i</span> <span class="o">:</span> <span class="n">stream</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">counter</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="n">List</span><span class="o">&lt;</span><span class="n">CountEntry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;&gt;</span> <span class="n">topk</span> <span class="o">=</span> <span class="n">counter</span><span class="o">.</span><span class="na">peek</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">CountEntry</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">item</span> <span class="o">:</span> <span class="n">topk</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+<hr><h2>
+<a name="quantiles" class="anchor" href="#quantiles"><span class="octicon octicon-link"></span></a>Quantiles</h2>
+
+<h3>
+<a name="algorithms-2" class="anchor" href="#algorithms-2"><span class="octicon octicon-link"></span></a>Algorithms</h3>
+
+<ul>
+<li>CKMSQuantiles <a href="#ref7">[7]</a>
+</li>
+<li>Frugal2U <a href="#ref8">[8]</a>
+</li>
+<li>GKQuantiles <a href="#ref9">[9]</a>
+</li>
+<li>MPQuantiles <a href="#ref10">[10]</a>
+</li>
+<li>QDigest <a href="#ref11">[11]</a>
+</li>
+<li>WindowSketchQuantiles <a href="#ref12">[12]</a>
+</li>
+<li>RSSQuantiles <a href="#ref13">[13]</a>
+</li>
+<li>EnsembleQuantiles</li>
+<li>ExactQuantiles</li>
+<li>ExactQuantilesAll</li>
+<li>SimpleQuantiles</li>
+<li>SumQuantiles</li>
+<li>TDigest</li>
+</ul><h3>
+<a name="usage-2" class="anchor" href="#usage-2"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<div class="highlight highlight-java"><pre><span class="kt">double</span><span class="o">[]</span> <span class="n">quantiles</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[]{</span><span class="mf">0.05</span><span class="o">,</span> <span class="mf">0.25</span><span class="o">,</span> <span class="mf">0.5</span><span class="o">,</span> <span class="mf">0.75</span><span class="o">,</span> <span class="mf">0.95</span><span class="o">};</span>
+<span class="n">IQuantiles</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frugal2U</span><span class="o">(</span><span class="n">quantiles</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+
+<span class="n">RandomEngine</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MersenneTwister64</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+<span class="n">Normal</span> <span class="n">dist</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Normal</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="n">r</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">numSamples</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">;</span>
+
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numSamples</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">dist</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">());</span>
+    <span class="n">instance</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">num</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">double</span> <span class="n">q</span> <span class="o">:</span> <span class="n">quantiles</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">q</span> <span class="o">+</span> <span class="s">": "</span> <span class="o">+</span> <span class="n">instance</span><span class="o">.</span><span class="na">getQuantile</span><span class="o">(</span><span class="n">q</span><span class="o">));</span>
+<span class="o">}</span>
+</pre></div>
+
+<hr><h2>
+<a name="cardinality" class="anchor" href="#cardinality"><span class="octicon octicon-link"></span></a>Cardinality</h2>
+
+<h3>
+<a name="algorithms-3" class="anchor" href="#algorithms-3"><span class="octicon octicon-link"></span></a>Algorithms</h3>
+
+<ul>
+<li>AdaptiveCounting <a href="#ref14">[14]</a>
+</li>
+<li>LogLog <a href="#ref15">[15]</a>
+</li>
+<li>HyperLogLog <a href="#ref16">[16]</a>
+</li>
+<li>HyperLogLogPlus <a href="#ref17">[17]</a>
+</li>
+<li>LinearCounting <a href="#ref18">[18]</a>
+</li>
+<li>CountThenEstimate</li>
+</ul><h3>
+<a name="usage-3" class="anchor" href="#usage-3"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<div class="highlight highlight-java"><pre><span class="n">ICardinality</span> <span class="n">card</span> <span class="o">=</span> <span class="k">new</span> <span class="n">LogLog</span><span class="o">(</span><span class="mi">8</span><span class="o">);</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">card</span><span class="o">.</span><span class="na">offer</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*</span><span class="mf">100.0</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Cardinality: "</span> <span class="o">+</span> <span class="n">card</span><span class="o">.</span><span class="na">cardinality</span><span class="o">());</span>
+</pre></div>
+
+<hr><h2>
+<a name="average" class="anchor" href="#average"><span class="octicon octicon-link"></span></a>Average</h2>
+
+<h3>
+<a name="algorithms-4" class="anchor" href="#algorithms-4"><span class="octicon octicon-link"></span></a>Algorithms</h3>
+
+<ul>
+<li>MovingAverage</li>
+<li>SimpleEWMA</li>
+<li>VariableEWMA</li>
+</ul><h3>
+<a name="usage-4" class="anchor" href="#usage-4"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<div class="highlight highlight-java"><pre><span class="c1">// create a EWMA with 15 seconds of age for the metrics in the period</span>
+<span class="n">IAverage</span> <span class="n">avg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VariableEWMA</span><span class="o">(</span><span class="mf">15.0</span><span class="o">);</span>
+
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">avg</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*</span><span class="mf">100.0</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">i</span><span class="o">%</span><span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Average: "</span> <span class="o">+</span> <span class="n">avg</span><span class="o">.</span><span class="na">getAverage</span><span class="o">());</span>
+<span class="o">}</span>
+</pre></div>
+
+<h2>
+<a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h2>
+
+<p><code>[1]</code> <a name="ref1"></a>Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.</p>
+
+<p><code>[2]</code> <a name="ref2"></a>Cormode, Graham, and S. Muthukrishnan. "An improved data stream summary: the count-min sketch and its applications." Journal of Algorithms 55.1 (2005): 58-75.</p>
+
+<p><code>[3]</code> <a name="ref3"></a>Manku, Gurmeet Singh, and Rajeev Motwani. "Approximate frequency counts over data streams." Proceedings of the 28th international conference on Very Large Data Bases. VLDB Endowment, 2002.</p>
+
+<p><code>[4]</code> <a name="ref4"></a>M. J. Fischer and S. L. Salzberg. "Finding a Majority Among N Votes: Solution to Problem 81-5(Journal of Algorithms, June 1981)", Journal of Algorithms, 3:4, December 1982, pp. 362-380.</p>
+
+<p><code>[5]</code> <a name="ref5"></a>Misra, Jayadev, and David Gries. "Finding repeated elements." Science of computer programming 2.2 (1982): 143-152.</p>
+
+<p><code>[6]</code> <a name="ref6"></a>Metwally, Ahmed, Divyakant Agrawal, and Amr El Abbadi. "Efficient computation of frequent and top-k elements in data streams." Database Theory-ICDT 2005. Springer Berlin Heidelberg, 2005. 398-412.</p>
+
+<p><code>[7]</code> <a name="ref7"></a>Cormode, Graham, et al. "Effective computation of biased quantiles over data streams." Data Engineering, 2005. ICDE 2005. Proceedings. 21st International Conference on. IEEE, 2005.</p>
+
+<p><code>[8]</code> <a name="ref8"></a>Ma, Qiang, S. Muthukrishnan, and Mark Sandler. "Frugal Streaming for Estimating Quantiles." Space-Efficient Data Structures, Streams, and Algorithms. Springer Berlin Heidelberg, 2013. 77-96.</p>
+
+<p><code>[9]</code> <a name="ref9"></a>Greenwald, Michael, and Sanjeev Khanna. "Space-efficient online computation of quantile summaries." ACM SIGMOD Record. Vol. 30. No. 2. ACM, 2001.</p>
+
+<p><code>[10]</code> <a name="ref10"></a>Munro, J. Ian, and Mike S. Paterson. "Selection and sorting with limited storage." Theoretical computer science 12.3 (1980): 315-323.</p>
+
+<p><code>[11]</code> <a name="ref11"></a>Shrivastava, Nisheeth, et al. "Medians and beyond: new aggregation techniques for sensor networks." Proceedings of the 2nd international conference on Embedded networked sensor systems. ACM, 2004.</p>
+
+<p><code>[12]</code> <a name="ref12"></a>Arasu, Arvind, and Gurmeet Singh Manku. "Approximate counts and quantiles over sliding windows." Proceedings of the twenty-third ACM SIGMOD-SIGACT-SIGART symposium on Principles of database systems. ACM, 2004.</p>
+
+<p><code>[13]</code> <a name="ref13"></a>Gilbert, Anna C., et al. "How to summarize the universe: Dynamic maintenance of quantiles." Proceedings of the 28th international conference on Very Large Data Bases. VLDB Endowment, 2002.</p>
+
+<p><code>[14]</code> <a name="ref14"></a>Cai, Min, et al. "Fast and accurate traffic matrix measurement using adaptive cardinality counting." Proceedings of the 2005 ACM SIGCOMM workshop on Mining network data. ACM, 2005.</p>
+
+<p><code>[15]</code> <a name="ref15"></a>Durand, Marianne, and Philippe Flajolet. "Loglog counting of large cardinalities." Algorithms-ESA 2003. Springer Berlin Heidelberg, 2003. 605-617.</p>
+
+<p><code>[16]</code> <a name="ref16"></a>Flajolet, Philippe, et al. "HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm." DMTCS Proceedings 1 (2008).</p>
+
+<p><code>[17]</code> <a name="ref17"></a>Heule, Stefan, Marc Nunkesser, and Alexander Hall. "HyperLogLog in practice: algorithmic engineering of a state of the art cardinality estimation algorithm." Proceedings of the 16th International Conference on Extending Database Technology. ACM, 2013.</p>
+
+<p><code>[18]</code> <a name="ref18"></a>Whang, Kyu-Young, Brad T. Vander-Zanden, and Howard M. Taylor. "A linear-time probabilistic counting algorithm for database applications." ACM Transactions on Database Systems (TODS) 15.2 (1990): 208-229.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/mayconbordin">mayconbordin</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
