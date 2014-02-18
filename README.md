@@ -3,6 +3,17 @@ Streaminer
 
 A collection of algorithms for mining data streams, including frequent itemsets, quantiles, sampling, moving averages, set membership and cardinality.
 
+## Releases
+
+Maven:
+
+```xml
+<dependency>
+    <groupId>com.github.mayconbordin</groupId>
+    <artifactId>streaminer</artifactId>
+    <version>1.0</version>
+</dependency>
+```
 
 ## Frequent Itemsets
 
