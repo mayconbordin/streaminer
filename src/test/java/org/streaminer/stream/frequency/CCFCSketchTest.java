@@ -21,7 +21,7 @@ public class CCFCSketchTest {
      * Test of add method, of class CCFCSketch.
      */
     @Test
-    public void test() {
+    public void testFrequency() {
         int n=1048575, lgn=10, range=123456;
         int width = 512, depth = 5, gran = 1;
         double phi = 0.01;
@@ -67,6 +67,27 @@ public class CCFCSketchTest {
         System.out.println("Estimative for " + val + ": " + sketch.estimateCount(96699, depth));
         
         gen.checkOutput(outlist, (int) thresh, hh);*/
+    }
+    
+    
+    @Test
+    public void testF2Estimative() {
+        int n = 1048575;
+        int range = 12345;
+        
+        CCFCSketch sketch = new CCFCSketch(512,5,1,1);
+        StreamGenerator gen = new StreamGenerator(0.8, n, range);
+        gen.generate();
+        gen.exact();
+        
+        long[] stream = gen.stream;
+        long sumsq = gen.sumsq;
+        
+        for (int i=1; i<=range; i++) 
+            sketch.add((int)stream[i], 1);  
+        
+        System.out.println("Exact F2: " + sumsq);
+        System.out.println("Estimated F2: " + sketch.estimateF2());
     }
     
 }
