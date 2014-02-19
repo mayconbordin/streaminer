@@ -12,11 +12,11 @@ public class StreamGenerator {
     private Random random = new Random();
     private ZipfDistribution zipf;
     
-    int[] exact;
-    long[] stream;
-    long sumsq;
-    long distinct;
-    int[] quartiles;
+    public int[] exact;
+    public long[] stream;
+    public long sumsq;
+    public long distinct;
+    public int[] quartiles;
     
     private int range;
     private int n;
