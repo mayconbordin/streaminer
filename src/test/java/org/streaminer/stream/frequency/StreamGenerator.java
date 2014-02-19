@@ -43,7 +43,7 @@ public class StreamGenerator {
             value =  (HashUtils.hash31(a,b, (long) zipf.nextDouble())&1048575);
             exact[(int)value]++;
             stream[i] = value;
-            System.out.println("Stream " + i + " is " + value);
+            //System.out.println("Stream " + i + " is " + value);
         }
     }
     
