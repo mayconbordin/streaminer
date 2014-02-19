@@ -13,7 +13,6 @@
  */
 package org.streaminer.stream.frequency;
 
-import org.streaminer.stream.membership.Filter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -257,6 +256,10 @@ public class CountMinSketchAlt implements ISimpleFrequency<Object> {
             // Shouldn't happen
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean contains(Object item) {
+        return estimateCount(item) > 0;
     }
 
     @SuppressWarnings("serial")

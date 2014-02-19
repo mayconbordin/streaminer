@@ -21,6 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * </p>
  * 
  * @author Marcin Skirzynski (main work), Benedikt Kulmann (modifications)
+ * @param <T>
  */
 public class CountSketch<T> extends BaseFrequency<T> {
     /**

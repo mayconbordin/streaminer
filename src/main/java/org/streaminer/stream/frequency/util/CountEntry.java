@@ -95,4 +95,26 @@ public class CountEntry<T> implements Serializable, Cloneable, Comparable<CountE
         return (x < y) ? -1 : ((x == y) ? 0 : 1);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        
+        if (!(obj instanceof CountEntry)) {
+            return false;
+        }
+        
+        CountEntry other = (CountEntry) obj;
+        return this.item.equals(other.item);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + (this.item != null ? this.item.hashCode() : 0);
+        return hash;
+    }
+
+    
 }

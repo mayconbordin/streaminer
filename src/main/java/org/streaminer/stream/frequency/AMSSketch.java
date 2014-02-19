@@ -194,4 +194,8 @@ public class AMSSketch implements ISimpleFrequency<Long>, Comparable<AMSSketch> 
         
         return true;
     }
+
+    public boolean contains(Long item) {
+        return estimateCount(item) > 0;
+    }
 }

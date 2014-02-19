@@ -1,11 +1,11 @@
 package org.streaminer.stream.model;
 
 import org.streaminer.stream.frequency.FrequencyException;
-import org.streaminer.stream.frequency.IRichFrequency;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import org.streaminer.stream.frequency.IRichFrequency;
 
 /**
  * <p>

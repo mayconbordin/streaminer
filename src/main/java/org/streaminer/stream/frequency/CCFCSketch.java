@@ -170,4 +170,8 @@ public class CCFCSketch implements ISimpleFrequency<Integer> {
     public long size() {
         return count;
     }
+
+    public boolean contains(Integer item) {
+        return estimateCount(item) > 0;
+    }
 }

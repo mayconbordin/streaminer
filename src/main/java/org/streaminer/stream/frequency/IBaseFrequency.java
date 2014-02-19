@@ -1,8 +1,5 @@
 package org.streaminer.stream.frequency;
 
-import java.util.List;
-import org.streaminer.stream.frequency.util.CountEntry;
-
 /**
  *
  * @author Maycon Viana Bordin <mayconbordin@gmail.com>
