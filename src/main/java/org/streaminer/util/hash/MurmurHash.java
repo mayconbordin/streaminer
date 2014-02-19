@@ -25,9 +25,15 @@ package org.streaminer.util.hash;
  * Andrzej Bialecki (ab at getopt org).
  * </p>
  */
-public class MurmurHash {
+public class MurmurHash extends Hash {
+    
+    private static MurmurHash _instance = new MurmurHash();
+  
+    public static Hash getInstance() {
+      return _instance;
+    }
 
-    public static int hash(Object o) {
+    public int hash(Object o) {
         if (o == null)
         {
             return 0;
@@ -58,16 +64,8 @@ public class MurmurHash {
         }
         return hash(o.toString());
     }
-
-    public static int hash(byte[] data) {
-        return hash(data, data.length, -1);
-    }
-
-    public static int hash(byte[] data, int seed) {
-        return hash(data, data.length, seed);
-    }
-
-    public static int hash(byte[] data, int length, int seed) {
+    
+    public int hash(byte[] data, int length, int seed) {
         int m = 0x5bd1e995;
         int r = 24;
 
@@ -119,7 +117,7 @@ public class MurmurHash {
         return h;
     }
 
-    public static int hashLong(long data) {
+    public int hashLong(long data) {
         int m = 0x5bd1e995;
         int r = 24;
 
@@ -141,7 +139,7 @@ public class MurmurHash {
         return h;
     }
 
-    public static long hash64(Object o) {
+    public long hash64(Object o) {
         if (o == null) {
             return 0l;
         } else if (o instanceof String) {
@@ -164,7 +162,7 @@ public class MurmurHash {
      * @param length length of the array to hash
      * @return 64 bit hash of the given string
      */
-    public static long hash64(final byte[] data, int length) {
+    public long hash64(final byte[] data, int length) {
         return hash64(data, length, 0xe17a1465);
     }
 
@@ -177,7 +175,7 @@ public class MurmurHash {
      * @param seed   initial seed value
      * @return 64 bit hash of the given array
      */
-    public static long hash64(final byte[] data, int length, int seed) {
+    public long hash64(final byte[] data, int length, int seed) {
         final long m = 0xc6a4a7935bd1e995L;
         final int r = 47;
 

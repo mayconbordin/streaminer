@@ -57,6 +57,16 @@ long freq = counter.estimateCount(item);
 System.out.println(item + ": " + freq);
 ```
 
+### Comparison
+
+|Algorithm                  |Window Model          |Update Interval|Approx. Type  |Support Error Bound|False Results                                 |
+|---------------------------|:--------------------:|:-------------:|:------------:|:-----------------:|:---------------------------------------------|
+|Lossy Counting [[3]](#ref3)|Landmark / Count-Based|Per Batch      |False-Positive|ε                  |<code>{X &#124; (σ - ε) ≤ *sup*(X) < σ}</code>|
+|
+
+
+
+
 ---
 
 ## Top-K

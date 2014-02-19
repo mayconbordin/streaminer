@@ -21,6 +21,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
+import org.streaminer.util.hash.HashUtils;
 
 /**
  * Count-Min Sketch datastructure.
@@ -123,7 +124,7 @@ public class CountMinSketchAlt implements ISimpleFrequency<Object> {
         } else if (item instanceof Long) {
             addLong((Long)item, count);
         } else if (item instanceof String) {
-            int[] buckets = Filter.getHashBuckets((String)item, depth, width);
+            int[] buckets = HashUtils.getHashBuckets((String)item, depth, width);
             for (int i = 0; i < depth; ++i) {
                 table[i][buckets[i]] += count;
             }
@@ -141,7 +142,7 @@ public class CountMinSketchAlt implements ISimpleFrequency<Object> {
             estimateCountLong((Long)item);
         } else if (item instanceof String) {
             long res = Long.MAX_VALUE;
-            int[] buckets = Filter.getHashBuckets((String)item, depth, width);
+            int[] buckets = HashUtils.getHashBuckets((String)item, depth, width);
             for (int i = 0; i < depth; ++i) {
                 res = Math.min(res, table[i][buckets[i]]);
             }

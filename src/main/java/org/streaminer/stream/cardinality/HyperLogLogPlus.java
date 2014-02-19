@@ -316,7 +316,7 @@ public class HyperLogLogPlus implements ICardinality {
      */
     @Override
     public boolean offer(Object o) {
-        long x = MurmurHash.hash64(o);
+        long x = MurmurHash.getInstance().hash64(o);
         return offerHashed(x);
     }
 

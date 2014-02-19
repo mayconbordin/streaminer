@@ -94,7 +94,7 @@ public class LinearCounting implements ICardinality
     {
         boolean modified = false;
 
-        long hash = (long) MurmurHash.hash(o);
+        long hash = (long) MurmurHash.getInstance().hash(o);
         int bit = (int) ((hash & 0xFFFFFFFFL) % (long) length);
         int i = bit / 8;
         byte b = map[i];

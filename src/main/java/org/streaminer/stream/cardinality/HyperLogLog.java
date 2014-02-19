@@ -158,7 +158,7 @@ public class HyperLogLog implements ICardinality {
 
     @Override
     public boolean offer(Object o) {
-        final int x = MurmurHash.hash(o);
+        final int x = MurmurHash.getInstance().hash(o);
         return offerHashed(x);
     }
 

@@ -10,7 +10,7 @@ import org.streaminer.util.hash.JenkinsHash;
 public class JenkinsHashFunction<T> implements HashFunction<T> {
 
     public long hash(T x) {
-        return JenkinsHash.hash64(x);
+        return JenkinsHash.getInstance().hash64(x);
     }
     
 }

@@ -143,7 +143,7 @@ public class LogLog implements ICardinality
     @Override
     public boolean offer(Object o)
     {
-        int x = MurmurHash.hash(o);
+        int x = MurmurHash.getInstance().hash(o);
         return offerHashed(x);
     }
 
