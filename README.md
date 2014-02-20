@@ -57,16 +57,6 @@ long freq = counter.estimateCount(item);
 System.out.println(item + ": " + freq);
 ```
 
-### Comparison
-
-|Algorithm                  |Window Model          |Update Interval|Approx. Type  |Support Error Bound|False Results                                 |
-|---------------------------|:--------------------:|:-------------:|:------------:|:-----------------:|:---------------------------------------------|
-|Lossy Counting [[3]](#ref3)|Landmark / Count-Based|Per Batch      |False-Positive|ε                  |<code>{X &#124; (σ - ε) ≤ *sup*(X) < σ}</code>|
-|
-
-
-
-
 ---
 
 ## Top-K
@@ -184,6 +174,17 @@ for (int i=0; i<100; i++) {
 }
 ```
 
+---
+
+## Membership
+
+### Algorithms
+
+  - BloomFilter [[22]](#ref22)
+  - CountingBloomFilter [[19]](#ref19)
+  - DynamicBloomFilter [[20]](#ref20)
+  - RetouchedBloomFilter [[21]](#ref21)
+
 ## References
 
 `[1]` <a name="ref1"></a>Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
@@ -221,3 +222,11 @@ for (int i=0; i<100; i++) {
 `[17]` <a name="ref17"></a>Heule, Stefan, Marc Nunkesser, and Alexander Hall. "HyperLogLog in practice: algorithmic engineering of a state of the art cardinality estimation algorithm." Proceedings of the 16th International Conference on Extending Database Technology. ACM, 2013.
 
 `[18]` <a name="ref18"></a>Whang, Kyu-Young, Brad T. Vander-Zanden, and Howard M. Taylor. "A linear-time probabilistic counting algorithm for database applications." ACM Transactions on Database Systems (TODS) 15.2 (1990): 208-229.
+
+`[19]` <a name="ref19"></a>Fan, L., Cao, P., Almeida, J., & Broder, A. Z. (2000). Summary cache: a scalable wide-area web cache sharing protocol. IEEE/ACM Transactions on Networking (TON), 8(3), 281-293.
+
+`[20]` <a name="ref20"></a>Guo, Deke, Jie Wu, Honghui Chen, and Xueshan Luo. "Theory and Network Applications of Dynamic Bloom Filters." In INFOCOM, pp. 1-12. 2006.
+
+`[21]` <a name="ref21"></a>Donnet, Benoit, Bruno Baynat, and Timur Friedman. "Retouched bloom filters: allowing networked applications to trade off selected false positives against false negatives." In Proceedings of the 2006 ACM CoNEXT conference, p. 13. ACM, 2006.
+
+`[22]` <a name="ref22"></a>Bloom, Burton H. "Space/time trade-offs in hash coding with allowable errors." Communications of the ACM 13, no. 7 (1970): 422-426.
