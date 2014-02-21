@@ -184,6 +184,8 @@ for (int i=0; i<100; i++) {
   - CountingBloomFilter [[19]](#ref19)
   - DynamicBloomFilter [[20]](#ref20)
   - RetouchedBloomFilter [[21]](#ref21)
+  - StableBloomFilter [[23]](#ref23)
+  - TimingBloomFilter [[24]](#ref24)
 
 ## References
 
@@ -230,3 +232,7 @@ for (int i=0; i<100; i++) {
 `[21]` <a name="ref21"></a>Donnet, Benoit, Bruno Baynat, and Timur Friedman. "Retouched bloom filters: allowing networked applications to trade off selected false positives against false negatives." In Proceedings of the 2006 ACM CoNEXT conference, p. 13. ACM, 2006.
 
 `[22]` <a name="ref22"></a>Bloom, Burton H. "Space/time trade-offs in hash coding with allowable errors." Communications of the ACM 13, no. 7 (1970): 422-426.
+
+`[23]` <a name="ref23"></a>Deng, Fan, and Davood Rafiei. "Approximately detecting duplicates for streaming data using stable bloom filters." Proceedings of the 2006 ACM SIGMOD international conference on Management of data. ACM, 2006.
+
+`[24]` <a name="ref24"></a>Dautrich Jr, Jonathan L., and Chinya V. Ravishankar. "Inferential time-decaying Bloom filters." Proceedings of the 16th International Conference on Extending Database Technology. ACM, 2013.
