@@ -152,6 +152,20 @@ public class MurmurHash extends Hash {
         
         return hash64(o.toString());
     }
+    
+    public long hash64(Object o, int seed) {
+        if (o == null) {
+            return 0l;
+        } else if (o instanceof String) {
+            final byte[] bytes = ((String) o).getBytes();
+            return hash64(bytes, bytes.length, seed);
+        } else if (o instanceof byte[]) {
+            final byte[] bytes = (byte[]) o;
+            return hash64(bytes, bytes.length, seed);
+        }
+        
+        return hash64(o.toString(), seed);
+    }
 
     // 64 bit implementation copied from here:  https://github.com/tnm/murmurhash-java
 
