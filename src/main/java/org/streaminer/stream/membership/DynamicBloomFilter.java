@@ -80,12 +80,12 @@ import java.io.IOException;
  * Originally created by
  * <a href="http://www.one-lab.org">European Commission One-Lab Project 034819</a>.
  *
- * @see Filter The general behavior of a filter
+ * @see AbstractFilter The general behavior of a filter
  * @see BloomFilter A Bloom filter
  * 
  * @see <a href="http://www.cse.fau.edu/~jie/research/publications/Publication_files/infocom2006.pdf">Theory and Network Applications of Dynamic Bloom Filters</a>
  */
-public class DynamicBloomFilter extends Filter {
+public class DynamicBloomFilter extends AbstractFilter {
   /** 
    * Threshold for the maximum number of key to record in a dynamic Bloom filter row.
    */
@@ -147,7 +147,7 @@ public class DynamicBloomFilter extends Filter {
   }
 
   @Override
-  public void and(Filter filter) {
+  public void and(AbstractFilter filter) {
     if (filter == null
         || !(filter instanceof DynamicBloomFilter)
         || filter.vectorSize != this.vectorSize
@@ -189,7 +189,7 @@ public class DynamicBloomFilter extends Filter {
   }
 
   @Override
-  public void or(Filter filter) {
+  public void or(AbstractFilter filter) {
     if (filter == null
         || !(filter instanceof DynamicBloomFilter)
         || filter.vectorSize != this.vectorSize
@@ -208,7 +208,7 @@ public class DynamicBloomFilter extends Filter {
   }
 
   @Override
-  public void xor(Filter filter) {
+  public void xor(AbstractFilter filter) {
     if (filter == null
         || !(filter instanceof DynamicBloomFilter)
         || filter.vectorSize != this.vectorSize

@@ -71,11 +71,11 @@ import java.util.BitSet;
  * Originally created by
  * <a href="http://www.one-lab.org">European Commission One-Lab Project 034819</a>.
  * 
- * @see Filter The general behavior of a filter
+ * @see AbstractFilter The general behavior of a filter
  * 
  * @see <a href="http://portal.acm.org/citation.cfm?id=362692&dl=ACM&coll=portal">Space/Time Trade-Offs in Hash Coding with Allowable Errors</a>
  */
-public class BloomFilter extends Filter {
+public class BloomFilter extends AbstractFilter {
   private static final byte[] bitvalues = new byte[] {
     (byte)0x01,
     (byte)0x02,
@@ -123,7 +123,7 @@ public class BloomFilter extends Filter {
   }
 
   @Override
-  public void and(Filter filter) {
+  public void and(AbstractFilter filter) {
     if(filter == null
         || !(filter instanceof BloomFilter)
         || filter.vectorSize != this.vectorSize
@@ -156,7 +156,7 @@ public class BloomFilter extends Filter {
   }
 
   @Override
-  public void or(Filter filter) {
+  public void or(AbstractFilter filter) {
     if(filter == null
         || !(filter instanceof BloomFilter)
         || filter.vectorSize != this.vectorSize
@@ -167,7 +167,7 @@ public class BloomFilter extends Filter {
   }
 
   @Override
-  public void xor(Filter filter) {
+  public void xor(AbstractFilter filter) {
     if(filter == null
         || !(filter instanceof BloomFilter)
         || filter.vectorSize != this.vectorSize

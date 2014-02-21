@@ -63,11 +63,11 @@ import java.io.IOException;
  * Originally created by
  * <a href="http://www.one-lab.org">European Commission One-Lab Project 034819</a>.
  *
- * @see Filter The general behavior of a filter
+ * @see AbstractFilter The general behavior of a filter
  * 
  * @see <a href="http://portal.acm.org/citation.cfm?id=343571.343572">Summary cache: a scalable wide-area web cache sharing protocol</a>
  */
-public final class CountingBloomFilter extends Filter {
+public final class CountingBloomFilter extends AbstractFilter {
   /** Storage for the counting buckets */
   private long[] buckets;
 
@@ -154,7 +154,7 @@ public final class CountingBloomFilter extends Filter {
   }
 
   @Override
-  public void and(Filter filter) {
+  public void and(AbstractFilter filter) {
     if(filter == null
         || !(filter instanceof CountingBloomFilter)
         || filter.vectorSize != this.vectorSize
@@ -238,7 +238,7 @@ public final class CountingBloomFilter extends Filter {
   }
 
   @Override
-  public void or(Filter filter) {
+  public void or(AbstractFilter filter) {
     if(filter == null
         || !(filter instanceof CountingBloomFilter)
         || filter.vectorSize != this.vectorSize
@@ -255,7 +255,7 @@ public final class CountingBloomFilter extends Filter {
   }
 
   @Override
-  public void xor(Filter filter) {
+  public void xor(AbstractFilter filter) {
     throw new UnsupportedOperationException("xor() is undefined for "
         + this.getClass().getName());
   }
