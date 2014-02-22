@@ -19,8 +19,6 @@
         <p>A collection of algorithms for mining data streams</p>
 
         <p class="view"><a href="https://github.com/mayconbordin/streaminer">View the Project on GitHub <small>mayconbordin/streaminer</small></a></p>
-        
-        <p class="view"><a href="http://mayconbordin.github.io/streaminer/api">API Documentation</a></p>
 
 
         <ul>
@@ -34,6 +32,18 @@
 <a name="streaminer" class="anchor" href="#streaminer"><span class="octicon octicon-link"></span></a>Streaminer</h1>
 
 <p>A collection of algorithms for mining data streams, including frequent itemsets, quantiles, sampling, moving averages, set membership and cardinality.</p>
+
+<h2>
+<a name="releases" class="anchor" href="#releases"><span class="octicon octicon-link"></span></a>Releases</h2>
+
+<p>Maven:</p>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.github.mayconbordin<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>streaminer<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
 
 <h2>
 <a name="frequent-itemsets" class="anchor" href="#frequent-itemsets"><span class="octicon octicon-link"></span></a>Frequent Itemsets</h2>
@@ -204,6 +214,8 @@
 <li>MovingAverage</li>
 <li>SimpleEWMA</li>
 <li>VariableEWMA</li>
+<li>TEWMA <a href="#ref25">[25]</a>
+</li>
 </ul><h3>
 <a name="usage-4" class="anchor" href="#usage-4"><span class="octicon octicon-link"></span></a>Usage</h3>
 
@@ -217,7 +229,26 @@
 <span class="o">}</span>
 </pre></div>
 
-<h2>
+<hr><h2>
+<a name="membership" class="anchor" href="#membership"><span class="octicon octicon-link"></span></a>Membership</h2>
+
+<h3>
+<a name="algorithms-5" class="anchor" href="#algorithms-5"><span class="octicon octicon-link"></span></a>Algorithms</h3>
+
+<ul>
+<li>BloomFilter <a href="#ref22">[22]</a>
+</li>
+<li>CountingBloomFilter <a href="#ref19">[19]</a>
+</li>
+<li>DynamicBloomFilter <a href="#ref20">[20]</a>
+</li>
+<li>RetouchedBloomFilter <a href="#ref21">[21]</a>
+</li>
+<li>StableBloomFilter <a href="#ref23">[23]</a>
+</li>
+<li>TimingBloomFilter <a href="#ref24">[24]</a>
+</li>
+</ul><h2>
 <a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h2>
 
 <p><code>[1]</code> <a name="ref1"></a>Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.</p>
@@ -255,6 +286,20 @@
 <p><code>[17]</code> <a name="ref17"></a>Heule, Stefan, Marc Nunkesser, and Alexander Hall. "HyperLogLog in practice: algorithmic engineering of a state of the art cardinality estimation algorithm." Proceedings of the 16th International Conference on Extending Database Technology. ACM, 2013.</p>
 
 <p><code>[18]</code> <a name="ref18"></a>Whang, Kyu-Young, Brad T. Vander-Zanden, and Howard M. Taylor. "A linear-time probabilistic counting algorithm for database applications." ACM Transactions on Database Systems (TODS) 15.2 (1990): 208-229.</p>
+
+<p><code>[19]</code> <a name="ref19"></a>Fan, L., Cao, P., Almeida, J., &amp; Broder, A. Z. (2000). Summary cache: a scalable wide-area web cache sharing protocol. IEEE/ACM Transactions on Networking (TON), 8(3), 281-293.</p>
+
+<p><code>[20]</code> <a name="ref20"></a>Guo, Deke, Jie Wu, Honghui Chen, and Xueshan Luo. "Theory and Network Applications of Dynamic Bloom Filters." In INFOCOM, pp. 1-12. 2006.</p>
+
+<p><code>[21]</code> <a name="ref21"></a>Donnet, Benoit, Bruno Baynat, and Timur Friedman. "Retouched bloom filters: allowing networked applications to trade off selected false positives against false negatives." In Proceedings of the 2006 ACM CoNEXT conference, p. 13. ACM, 2006.</p>
+
+<p><code>[22]</code> <a name="ref22"></a>Bloom, Burton H. "Space/time trade-offs in hash coding with allowable errors." Communications of the ACM 13, no. 7 (1970): 422-426.</p>
+
+<p><code>[23]</code> <a name="ref23"></a>Deng, Fan, and Davood Rafiei. "Approximately detecting duplicates for streaming data using stable bloom filters." Proceedings of the 2006 ACM SIGMOD international conference on Management of data. ACM, 2006.</p>
+
+<p><code>[24]</code> <a name="ref24"></a>Dautrich Jr, Jonathan L., and Chinya V. Ravishankar. "Inferential time-decaying Bloom filters." Proceedings of the 16th International Conference on Extending Database Technology. ACM, 2013.</p>
+
+<p><code>[25]</code> <a name="ref25"></a>Martin, Ruediger, and Michael Menth. "Improving the Timeliness of Rate Measurements." In MMB, pp. 145-154. 2004.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/mayconbordin">mayconbordin</a></p>
