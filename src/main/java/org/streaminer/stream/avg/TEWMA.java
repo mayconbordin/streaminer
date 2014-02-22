@@ -173,6 +173,14 @@ public class TEWMA {
         return new String(hexChars);
     }
     
+    /**
+     * Converts an object to a byte array to generate the SHA-1 digest. Numbers
+     * are converted to {@link String}, strings are then converted to bytes. Any
+     * other object will have its hash code converted to string and then to a byte
+     * array.
+     * @param o
+     * @return 
+     */
     protected byte[] toSHA1(Object o) {
         if (o instanceof byte[])
             return toSHA1((byte[]) o);
