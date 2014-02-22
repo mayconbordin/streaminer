@@ -15,6 +15,9 @@ Maven:
 </dependency>
 ```
 
+## [API Documentation](http://mayconbordin.github.io/streaminer/api/)
+
+
 ## Frequent Itemsets
 
 ### Algorithms
