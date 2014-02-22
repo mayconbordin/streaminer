@@ -29,7 +29,7 @@ import static java.lang.Math.*;
  * See <i>A Linear-Time Probabilistic Counting Algorithm for Database Applications</i>
  * by Whang, Vander-Zanden, Taylor
  */
-public class LinearCounting implements ICardinality
+public class LinearCounting implements IRichCardinality
 {
     /**
      * Bitmap
@@ -169,7 +169,7 @@ public class LinearCounting implements ICardinality
      * @throws LinearCountingMergeException if estimators are not mergeable (all estimators must be instances of LinearCounting of the same size)
      */
     @Override
-    public ICardinality merge(ICardinality... estimators) throws LinearCountingMergeException
+    public IRichCardinality merge(IRichCardinality... estimators) throws LinearCountingMergeException
     {
         if (estimators == null) 
         {
@@ -222,7 +222,7 @@ public class LinearCounting implements ICardinality
         }
     }
 
-    public static class Builder implements IBuilder<ICardinality>, Serializable
+    public static class Builder implements IBuilder<IRichCardinality>, Serializable
     {
         private static final long serialVersionUID = -4245416224034648428L;
 

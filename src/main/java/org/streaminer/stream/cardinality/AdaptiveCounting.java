@@ -105,7 +105,7 @@ public class AdaptiveCounting extends LogLog {
      * @throws LogLogMergeException if estimators are not mergeable (all estimators must be instances of LogLog of the same size)
      */
     @Override
-    public ICardinality merge(ICardinality... estimators) throws LogLogMergeException {
+    public IRichCardinality merge(IRichCardinality... estimators) throws LogLogMergeException {
         LogLog res = (LogLog) super.merge(estimators);
         return new AdaptiveCounting(res.M);
     }
@@ -124,7 +124,7 @@ public class AdaptiveCounting extends LogLog {
         return (AdaptiveCounting) estimators[0].merge(Arrays.copyOfRange(estimators, 1, estimators.length));
     }
 
-    public static class Builder implements IBuilder<ICardinality>, Serializable {
+    public static class Builder implements IBuilder<IRichCardinality>, Serializable {
         private static final long serialVersionUID = 2205437102378081334L;
         protected final int k;
 
@@ -164,7 +164,7 @@ public class AdaptiveCounting extends LogLog {
          * @throws IllegalArgumentException if maxCardinality is not a positive integer
          * @see LinearCounting.Builder#onePercentError(int)
          */
-        public static IBuilder<ICardinality> obyCount(long maxCardinality) {
+        public static IBuilder<IRichCardinality> obyCount(long maxCardinality) {
             if (maxCardinality <= 0) {
                 throw new IllegalArgumentException("maxCardinality (" + maxCardinality + ") must be a positive integer");
             }

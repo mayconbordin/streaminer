@@ -32,7 +32,7 @@ import java.util.*;
  * <p/>
  * Currently supports serialization with LinearCounting or AdaptiveCounting
  */
-public class CountThenEstimate implements ICardinality, Externalizable {
+public class CountThenEstimate implements IRichCardinality, Externalizable {
     protected final static byte LC = 1;
     protected final static byte AC = 2;
     protected final static byte HLC = 3;
@@ -52,13 +52,13 @@ public class CountThenEstimate implements ICardinality, Externalizable {
     /**
      * Factory for instantiating estimator after the tipping point is reached
      */
-    protected IBuilder<ICardinality> builder;
+    protected IBuilder<IRichCardinality> builder;
 
     /**
      * Cardinality estimator
      * Null until tipping point is reached
      */
-    protected ICardinality estimator;
+    protected IRichCardinality estimator;
 
     /**
      * Cardinality counter
@@ -78,7 +78,7 @@ public class CountThenEstimate implements ICardinality, Externalizable {
      * @param tippingPoint Cardinality at which exact counting gives way to estimation
      * @param builder      Factory for instantiating estimator after the tipping point is reached
      */
-    public CountThenEstimate(int tippingPoint, IBuilder<ICardinality> builder) {
+    public CountThenEstimate(int tippingPoint, IBuilder<IRichCardinality> builder) {
         this.tippingPoint = tippingPoint;
         this.builder = builder;
         this.counter = new HashSet<Object>();
@@ -241,7 +241,7 @@ public class CountThenEstimate implements ICardinality, Externalizable {
     }
 
     @Override
-    public ICardinality merge(ICardinality... estimators) throws CardinalityMergeException {
+    public IRichCardinality merge(IRichCardinality... estimators) throws CardinalityMergeException {
         if (estimators == null) {
             return mergeEstimators(this);
         }
@@ -263,7 +263,7 @@ public class CountThenEstimate implements ICardinality, Externalizable {
         CountThenEstimate merged = null;
         int numEstimators = (estimators == null) ? 0 : estimators.length;
         if (numEstimators > 0) {
-            List<ICardinality> tipped = new ArrayList<ICardinality>(numEstimators);
+            List<IRichCardinality> tipped = new ArrayList<IRichCardinality>(numEstimators);
             List<CountThenEstimate> untipped = new ArrayList<CountThenEstimate>(numEstimators);
 
             for (CountThenEstimate estimator : estimators) {
@@ -292,7 +292,7 @@ public class CountThenEstimate implements ICardinality, Externalizable {
                 if (!merged.tipped) {
                     merged.tip();
                 }
-                merged.estimator = merged.estimator.merge(tipped.toArray(new ICardinality[tipped.size()]));
+                merged.estimator = merged.estimator.merge(tipped.toArray(new IRichCardinality[tipped.size()]));
             }
 
         }

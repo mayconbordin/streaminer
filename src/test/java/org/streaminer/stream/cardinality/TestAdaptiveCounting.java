@@ -102,7 +102,7 @@ public class TestAdaptiveCounting
     @Test
     public void testLongCardinality()
     {
-        ICardinality ac = new AdaptiveCounting(16);
+        IRichCardinality ac = new AdaptiveCounting(16);
         for (long i = 0; i < 5000000000L; i++)
         {
             ac.offer(Long.valueOf(i));

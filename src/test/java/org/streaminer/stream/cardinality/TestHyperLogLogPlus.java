@@ -64,7 +64,7 @@ public class TestHyperLogLogPlus
             }
         }
 
-        ICardinality merged = counters[0];
+        IRichCardinality merged = counters[0];
         long sum = merged.cardinality();
         for (int i = 1; i < numSets; i++)
         {
@@ -214,7 +214,7 @@ public class TestHyperLogLogPlus
                 System.out.println("hllcardinality=" + hllPlus.cardinality() + " cardinality=" + cardinality);
                 HyperLogLogPlus deserialized = HyperLogLogPlus.Builder.build(hllPlus.getBytes());
                 assertEquals(hllPlus.cardinality(), deserialized.cardinality());
-                ICardinality merged = hllPlus.merge(deserialized);
+                IRichCardinality merged = hllPlus.merge(deserialized);
                 System.out.println(merged.cardinality() + " : " + hllPlus.cardinality());
                 assertEquals(hllPlus.cardinality(), merged.cardinality());
             }
@@ -246,7 +246,7 @@ public class TestHyperLogLogPlus
                     }
                     HyperLogLogPlus deserialized = HyperLogLogPlus.Builder.build(hllPlus.getBytes());
                     assertEquals(hllPlus.cardinality(), deserialized.cardinality());
-                    ICardinality merged = hllPlus.merge(deserialized);
+                    IRichCardinality merged = hllPlus.merge(deserialized);
                     assertEquals(hllPlus.cardinality(), merged.cardinality());
                 }
             }

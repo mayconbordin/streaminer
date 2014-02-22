@@ -54,7 +54,7 @@ import org.streaminer.util.Varint;
  * strategy and leverages data compression to compete with 'normal' for as long as possible
  * (sparse has the advantage on accuracy per unit of memory at low cardinality but quickly falls behind).
  */
-public class HyperLogLogPlus implements ICardinality {
+public class HyperLogLogPlus implements IRichCardinality {
     private enum Format {
         SPARSE, NORMAL
     }
@@ -876,7 +876,7 @@ public class HyperLogLogPlus implements ICardinality {
      * @throws CardinalityMergeException
      */
     @Override
-    public ICardinality merge(ICardinality... estimators) throws CardinalityMergeException {
+    public IRichCardinality merge(IRichCardinality... estimators) throws CardinalityMergeException {
         HyperLogLogPlus merged = new HyperLogLogPlus(p, sp);
         merged.addAll(this);
         
@@ -884,7 +884,7 @@ public class HyperLogLogPlus implements ICardinality {
             return merged;
         }
         
-        for (ICardinality estimator : estimators) {
+        for (IRichCardinality estimator : estimators) {
             if (!(estimator instanceof HyperLogLogPlus)) {
                 throw new HyperLogLogPlusMergeException("Cannot merge estimators of different class");
             }
@@ -911,7 +911,7 @@ public class HyperLogLogPlus implements ICardinality {
         return sparseSet;
     }
 
-    public static class Builder implements IBuilder<ICardinality>, Serializable {
+    public static class Builder implements IBuilder<IRichCardinality>, Serializable {
         private final int p;
         private final int sp;
 

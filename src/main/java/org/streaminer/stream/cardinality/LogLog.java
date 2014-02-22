@@ -21,7 +21,7 @@ import org.streaminer.util.IBuilder;
 
 import java.util.Arrays;
 
-public class LogLog implements ICardinality
+public class LogLog implements IRichCardinality
 {
     /**
      * Gamma function computed using SciLab
@@ -162,7 +162,7 @@ public class LogLog implements ICardinality
      * @throws LogLogMergeException if estimators are not mergeable (all estimators must be instances of LogLog of the same size)
      */
     @Override
-    public ICardinality merge(ICardinality... estimators) throws LogLogMergeException
+    public IRichCardinality merge(IRichCardinality... estimators) throws LogLogMergeException
     {
         if (estimators == null)
         {
@@ -170,7 +170,7 @@ public class LogLog implements ICardinality
         }
         
         byte[] mergedBytes = Arrays.copyOf(this.M, this.M.length);
-        for (ICardinality estimator : estimators)
+        for (IRichCardinality estimator : estimators)
         {
             if (!(this.getClass().isInstance(estimator)))
             {
@@ -216,7 +216,7 @@ public class LogLog implements ICardinality
         }
     }
 
-    public static class Builder implements IBuilder<ICardinality>
+    public static class Builder implements IBuilder<IRichCardinality>
     {
         protected final int k;
 

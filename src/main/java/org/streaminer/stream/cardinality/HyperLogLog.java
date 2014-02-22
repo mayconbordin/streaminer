@@ -71,7 +71,7 @@ import java.io.Serializable;
  * implementation google provides.
  * </p>
  */
-public class HyperLogLog implements ICardinality {
+public class HyperLogLog implements IRichCardinality {
     private final RegisterSet registerSet;
     private final int log2m;
     private final double alphaMM;
@@ -220,7 +220,7 @@ public class HyperLogLog implements ICardinality {
     }
 
     @Override
-    public ICardinality merge(ICardinality... estimators) throws CardinalityMergeException {
+    public IRichCardinality merge(IRichCardinality... estimators) throws CardinalityMergeException {
         HyperLogLog merged = new HyperLogLog(log2m);
         merged.addAll(this);
 
@@ -228,7 +228,7 @@ public class HyperLogLog implements ICardinality {
             return merged;
         }
 
-        for (ICardinality estimator : estimators) {
+        for (IRichCardinality estimator : estimators) {
             if (!(estimator instanceof HyperLogLog)) {
                 throw new HyperLogLogMergeException("Cannot merge estimators of different class");
             }
@@ -239,7 +239,7 @@ public class HyperLogLog implements ICardinality {
         return merged;
     }
 
-    public static class Builder implements IBuilder<ICardinality>, Serializable {
+    public static class Builder implements IBuilder<IRichCardinality>, Serializable {
         private double rsd;
 
         public Builder(double rsd) {

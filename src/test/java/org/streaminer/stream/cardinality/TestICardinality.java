@@ -32,11 +32,11 @@ public class TestICardinality
 {
 
     private int N = 1000000;
-    private ICardinality cardinalityEstimator;
+    private IRichCardinality cardinalityEstimator;
     private static Random prng = new Random();
     private static char[] hex = "0123456789abcdef".toCharArray();
 
-    public TestICardinality(ICardinality cardinalityEstimator)
+    public TestICardinality(IRichCardinality cardinalityEstimator)
     {
         super();
         this.cardinalityEstimator = cardinalityEstimator;
