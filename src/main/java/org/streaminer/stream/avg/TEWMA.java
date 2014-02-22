@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Time Exponential Weighted Moving Average Implements a smoothed rate meter using
+ * Time Exponential Weighted Moving Average implements a smoothed rate meter using
  * a CBF and a timestamp array it follows the TEWMA rules.
  * 
  * Reference:
