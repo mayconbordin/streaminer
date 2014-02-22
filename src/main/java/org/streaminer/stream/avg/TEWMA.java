@@ -31,6 +31,7 @@ public class TEWMA {
     private long[] timers;
 
     /**
+     * Creates a new data structure with nhash hash functions, each size shash bits.
      * @param nhash Number of hash functions
      * @param shash Size in bits of each hash digest (multiple of 8)
      * @param beta Smoothing parameter
@@ -70,7 +71,7 @@ public class TEWMA {
      * @param item The item to be added
      * @param quantity The value of the item
      * @param timestamp The epoch time in seconds for the item
-     * @return 
+     * @return The new value of the item
      */
     public double add(Object item, double quantity, long timestamp) {
         // compute the hash functions
@@ -92,10 +93,22 @@ public class TEWMA {
         return newCounter;
     }
     
+    /**
+     * Return the current value for the item.
+     * @param item The item to be checked
+     * @param timestamp The epoch time in seconds of the item
+     * @return The current value for the item
+     */
     public double check(Object item, long timestamp) {
         return getMinCounter(indexes(item), timestamp);
     }
     
+    /**
+     * Get the currrent value for an item with idx hash functions
+     * @param idx The hash functions for the item to be checked
+     * @param timestamp The timestamp of the item
+     * @return The current value of the item
+     */
     protected double getMinCounter(int[] idx, long timestamp) {
         double minCouter = counters[idx[0]];
         double deltat;
@@ -116,6 +129,11 @@ public class TEWMA {
         return minCouter;
     }
     
+    /**
+     * Generate the hash functions for an item.
+     * @param o The item for which the hash functions will be calculated
+     * @return The hash functions for the item
+     */
     protected int[] indexes(Object o) {
         int[] indexes = new int[nhash];
         byte[] msgDigest = toSHA1(o);
@@ -140,6 +158,11 @@ public class TEWMA {
         return indexes;
     }
     
+    /**
+     * Converts an array of bytes into a hexadecimal string.
+     * @param bytes The array of bytes to be converted
+     * @return A string containing the hex value
+     */
     protected String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
         for ( int j = 0; j < bytes.length; j++ ) {
@@ -160,6 +183,14 @@ public class TEWMA {
         return toSHA1(String.valueOf(o.hashCode()).getBytes());
     }
     
+    /**
+     * Generates a SHA-1 digest for the given byte array. Each four bytes from the
+     * digest are inverted, as in the original code, so that the results could be
+     * compared.
+     * 
+     * @param in The byte array to be hashed
+     * @return The byte array with the hash digest
+     */
     protected byte[] toSHA1(byte[] in) {
         sha1.reset();
         
