@@ -160,6 +160,7 @@ System.out.println("Cardinality: " + card.cardinality());
   - MovingAverage
   - SimpleEWMA
   - VariableEWMA
+  - TEWMA [[25]](#ref25)
 
 ### Usage
 
@@ -236,3 +237,5 @@ for (int i=0; i<100; i++) {
 `[23]` <a name="ref23"></a>Deng, Fan, and Davood Rafiei. "Approximately detecting duplicates for streaming data using stable bloom filters." Proceedings of the 2006 ACM SIGMOD international conference on Management of data. ACM, 2006.
 
 `[24]` <a name="ref24"></a>Dautrich Jr, Jonathan L., and Chinya V. Ravishankar. "Inferential time-decaying Bloom filters." Proceedings of the 16th International Conference on Extending Database Technology. ACM, 2013.
+
+`[25]` <a name="ref25"></a>Martin, Ruediger, and Michael Menth. "Improving the Timeliness of Rate Measurements." In MMB, pp. 145-154. 2004.
