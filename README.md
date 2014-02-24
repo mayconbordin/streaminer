@@ -193,6 +193,19 @@ for (int i=0; i<100; i++) {
   - StableBloomFilter [[23]](#ref23)
   - TimingBloomFilter [[24]](#ref24)
 
+### Usage
+
+```java
+IFilter bloom = new BloomFilter(1000, 32, Hash.MURMUR_HASH);
+
+for (int i = 0; i < 100; i++) {
+    String val = UUID.randomUUID().toString();
+    Key k = new Key(val.getBytes());
+    bloom.add(k);
+    System.out.println(val + " exists? " + bloom.membershipTest(k));
+}
+```
+
 ---
 
 ## Sampling
