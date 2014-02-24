@@ -141,6 +141,8 @@ for (double q : quantiles) {
   - HyperLogLogPlus [[17]](#ref17)
   - LinearCounting [[18]](#ref18)
   - CountThenEstimate
+  - BJKST [[26]](#ref26)
+  - FlajoletMartin [[27]](#ref27)
 
 ### Usage
 
@@ -190,6 +192,40 @@ for (int i=0; i<100; i++) {
   - RetouchedBloomFilter [[21]](#ref21)
   - StableBloomFilter [[23]](#ref23)
   - TimingBloomFilter [[24]](#ref24)
+
+---
+
+## Sampling
+
+### Algorithms
+
+  - BernoulliSampler
+  - ReservoirSampler
+  - SystematicSampler
+  - WRSampler (With Replacement)
+  - WeightedRandomSampler
+
+### Usage
+
+```java
+// Create a sampler with 30% probability
+ISampler sampler = new BernoulliSampler(0.3);
+
+Random rand = new Random();
+
+// Create a dummy stream of ints
+List<Integer> stream = new ArrayList<Integer>(1000);
+for (int i=0; i<1000; i++)
+    stream.add(rand.nextInt(100));
+
+for (Integer tuple : stream) {
+    if (sampler.next()) {
+        // tuple was sampled, do something
+    } else {
+        // tuple was ignored, move on
+    }
+}
+```
 
 ## References
 
@@ -242,3 +278,7 @@ for (int i=0; i<100; i++) {
 `[24]` <a name="ref24"></a>Dautrich Jr, Jonathan L., and Chinya V. Ravishankar. "Inferential time-decaying Bloom filters." Proceedings of the 16th International Conference on Extending Database Technology. ACM, 2013.
 
 `[25]` <a name="ref25"></a>Martin, Ruediger, and Michael Menth. "Improving the Timeliness of Rate Measurements." In MMB, pp. 145-154. 2004.
+
+`[26]` <a name="ref26"></a>Bar-Yossef, Ziv, et al. "Counting distinct elements in a data stream." Randomization and Approximation Techniques in Computer Science. Springer Berlin Heidelberg, 2002. 1-10.
+
+`[27]` <a name="ref27"></a>Flajolet, Philippe, and G. Nigel Martin. "Probabilistic counting algorithms for data base applications." Journal of computer and system sciences 31.2 (1985): 182-209.
