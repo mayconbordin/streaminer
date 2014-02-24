@@ -65,4 +65,12 @@ public class Pair<T1, T2>
     {
         return new Pair<X, Y>(x, y);
     }
+    
+    public T1 getFirst() {
+      return left;
+    }
+
+    public T2 getSecond() {
+      return right;
+    }
 }
