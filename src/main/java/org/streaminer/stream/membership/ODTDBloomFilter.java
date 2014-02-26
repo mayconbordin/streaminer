@@ -17,7 +17,7 @@ import org.streaminer.util.hash.MurmurHash;
  * 
  * @author Maycon Viana Bordin <mayconbordin@gmail.com>
  */
-public class ODTDBloomFilter {
+public class ODTDBloomFilter implements IFilter<String> {
     private static final MurmurHash hasher = new MurmurHash();
     
     private int bucketsPerWord;
