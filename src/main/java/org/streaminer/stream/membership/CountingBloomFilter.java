@@ -211,7 +211,7 @@ public final class CountingBloomFilter extends AbstractFilter {
    * <code>count</code> with the probability of the false negative rate of such
    * filter.
    */
-  public int approximateCount(Key key) {
+  public int estimateCount(Key key) {
     int res = Integer.MAX_VALUE;
     int[] h = hash.hash(key);
     hash.clear();
