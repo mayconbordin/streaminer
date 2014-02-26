@@ -22,6 +22,7 @@ public class VarCountingBloomFilter implements IFilter<String> {
      * @param exp The 2^exp number of buckets per word, resulting in a counter of at most (2^exp)-1
      */
     public VarCountingBloomFilter(int numElements, int bucketsPerElement, int exp) {
+        this.exp = exp;
         bucketsPerWord = (int) Math.pow(2, exp);
         maxCount   = bucketsPerWord - 1;
         hashCount  = BloomCalculations.computeBestK(bucketsPerElement);
@@ -124,7 +125,7 @@ public class VarCountingBloomFilter implements IFilter<String> {
         return buckets.length * bucketsPerWord;
     }
     
-    private int emptyBuckets() {
+    protected int emptyBuckets() {
         int n = 0;
         for (int i = 0; i < buckets(); i++) {
             if (new Bucket(i).value == 0) {
@@ -134,7 +135,7 @@ public class VarCountingBloomFilter implements IFilter<String> {
         return n;
     }
     
-    private int maxBucket() {
+    protected int maxBucket() {
         int max = 0;
         for (int i = 0; i < buckets(); i++) {
             Bucket bucket = new Bucket(i);
