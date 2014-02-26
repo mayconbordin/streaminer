@@ -114,7 +114,7 @@ public class VarCountingBloomFilter implements IFilter<String> {
      * @return A value between 0 and 1
      */
     public double getPercentNonZero() {
-        return numNonZero/numBuckets;
+        return (double) numNonZero / (double) numBuckets;
     }
     
     private Bucket getBucket(int i) {
