@@ -288,6 +288,7 @@ public class BloomFilterAlt<E> implements IFilter<E>, Serializable {
     public void clear() {
         bitset.clear();
         numberOfAddedElements = 0;
+        numNonZero = 0;
     }
 
     /**
@@ -321,6 +322,10 @@ public class BloomFilterAlt<E> implements IFilter<E>, Serializable {
      */
     public double getPercentNonZero() {
         return (double) numNonZero / (double) bitSetSize;
+    }
+    
+    public int getNumNonZero() {
+        return numNonZero;
     }
 
     /**
