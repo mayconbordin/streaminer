@@ -77,17 +77,22 @@ public class ODTDBloomFilter implements IFilter<String> {
      * @param item The item to be added
      */
     public void add(String item) {
-        add(item, 1);
+        add(item, 1, time());
+    }
+    
+    public void add(String item, int q) {
+        add(item, q, time());
     }
 
     /**
      * Add an item to the data structure.
      * @param item The item to be added
      * @param q The quantity for the key
+     * @param timestamp The time of insertion in seconds (epoch time)
      */
-    public void add(String item, int q) {
+    public void add(String item, int q, long timestamp) {
         assert item != null;
-        double count = estimateCount(item) + ((double)q * Math.log(1/beta));
+        double count = estimateCount(item, timestamp) + ((double)q * Math.log(1/beta));
         
         for (int bucketIndex : getHashBuckets(item)) {
             if (getBucket(bucketIndex) < count)
@@ -112,13 +117,16 @@ public class ODTDBloomFilter implements IFilter<String> {
         }
     }
     
+    public double estimateCount(String item) {
+        return estimateCount(item, time());
+    }
+    
     /**
      * Estimate the count for an item.
      * @param item The item to be estimated
      * @return The counter value for the item
      */
-    public double estimateCount(String item) {
-        long time = time();
+    public double estimateCount(String item, long time) {
         double res = Double.MAX_VALUE;
         
         for (int bucketIndex : getHashBuckets(item)) {

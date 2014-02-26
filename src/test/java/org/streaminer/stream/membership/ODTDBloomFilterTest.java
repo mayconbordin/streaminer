@@ -3,13 +3,7 @@ package org.streaminer.stream.membership;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.streaminer.util.hash.Hash;
 
 /**
  *
@@ -30,7 +24,7 @@ public class ODTDBloomFilterTest {
         ODTDBloomFilter instance = new ODTDBloomFilter(ELEMENTS, spec.bucketsPerElement, 0.9672);
         Map<Integer, Integer> count = new HashMap<Integer, Integer>(1000);
         
-        for (int i=0; i<100000000; i++) {
+        for (int i=0; i<100000; i++) {
             int num = r.nextInt(1000);
             instance.add(String.valueOf(num), 1);
             
