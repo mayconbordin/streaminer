@@ -124,6 +124,7 @@ public class ODTDBloomFilter implements IFilter<String> {
     /**
      * Estimate the count for an item.
      * @param item The item to be estimated
+     * @param time The timestamp in seconds
      * @return The counter value for the item
      */
     public double estimateCount(String item, long time) {
@@ -195,22 +196,22 @@ public class ODTDBloomFilter implements IFilter<String> {
     }
     
     private double getBucket(int bucketIndex) {
-        return buckets[bucketIndex/16][bucketIndex%16];
+        return buckets[bucketIndex/bucketsPerWord][bucketIndex%bucketsPerWord];
     }
     
     private void addToBucket(int bucketIndex, double value) {
-        buckets[bucketIndex/16][bucketIndex%16] += value;
+        buckets[bucketIndex/bucketsPerWord][bucketIndex%bucketsPerWord] += value;
     }
     
     private void setBucket(int bucketIndex, double value) {
-        buckets[bucketIndex/16][bucketIndex%16] = value;
+        buckets[bucketIndex/bucketsPerWord][bucketIndex%bucketsPerWord] = value;
     }
     
     private long getTimer(int bucketIndex) {
-        return timers[bucketIndex/16];
+        return timers[bucketIndex/bucketsPerWord];
     }
     
     private void setTimer(int bucketIndex, long value) {
-        timers[bucketIndex/16] = value;
+        timers[bucketIndex/bucketsPerWord] = value;
     }
 }
