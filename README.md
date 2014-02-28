@@ -187,11 +187,14 @@ for (int i=0; i<100; i++) {
 ### Algorithms
 
   - BloomFilter [[22]](#ref22)
+  - BloomFilterAlt (alternative implementation)
   - CountingBloomFilter [[19]](#ref19)
+  - VarCountingBloomFilter (with variable `bucketsPerWord`)
   - DynamicBloomFilter [[20]](#ref20)
   - RetouchedBloomFilter [[21]](#ref21)
   - StableBloomFilter [[23]](#ref23)
   - TimingBloomFilter [[24]](#ref24)
+  - ODTDBloomFilter [[28]](#ref28)
 
 ### Usage
 
@@ -213,6 +216,7 @@ for (int i = 0; i < 100; i++) {
 ### Algorithms
 
   - BernoulliSampler
+  - ChainSampler
   - ReservoirSampler
   - SystematicSampler
   - WRSampler (With Replacement)
@@ -295,3 +299,5 @@ for (Integer tuple : stream) {
 `[26]` <a name="ref26"></a>Bar-Yossef, Ziv, et al. "Counting distinct elements in a data stream." Randomization and Approximation Techniques in Computer Science. Springer Berlin Heidelberg, 2002. 1-10.
 
 `[27]` <a name="ref27"></a>Flajolet, Philippe, and G. Nigel Martin. "Probabilistic counting algorithms for data base applications." Journal of computer and system sciences 31.2 (1985): 182-209.
+
+`[28]` <a name="ref28"></a>Bianchi, Giuseppe, Nico d'Heureuse, and Saverio Niccolini. "On-demand time-decaying bloom filters for telemarketer detection." ACM SIGCOMM Computer Communication Review 41.5 (2011): 5-12.
