@@ -210,7 +210,7 @@ for (int i = 0; i < 100; i++) {
 ### Algorithms
 
   - BernoulliSampler
-  - ChainSampler
+  - ChainSampler [[29]](#ref29)
   - ReservoirSampler
   - SystematicSampler
   - WRSampler (With Replacement)
@@ -349,3 +349,5 @@ System.out.println("Prediction is: " + prediction);
 `[27]` <a name="ref27"></a>Flajolet, Philippe, and G. Nigel Martin. "Probabilistic counting algorithms for data base applications." Journal of computer and system sciences 31.2 (1985): 182-209.
 
 `[28]` <a name="ref28"></a>Bianchi, Giuseppe, Nico d'Heureuse, and Saverio Niccolini. "On-demand time-decaying bloom filters for telemarketer detection." ACM SIGCOMM Computer Communication Review 41.5 (2011): 5-12.
+
+`[29]` <a name="ref29"></a>Babcock, Brian, Mayur Datar, and Rajeev Motwani. "Sampling from a moving window over streaming data." Proceedings of the thirteenth annual ACM-SIAM symposium on Discrete algorithms. Society for Industrial and Applied Mathematics, 2002.
