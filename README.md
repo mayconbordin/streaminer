@@ -60,7 +60,6 @@ long freq = counter.estimateCount(item);
 System.out.println(item + ": " + freq);
 ```
 
----
 
 ## Top-K
 
@@ -89,7 +88,6 @@ for (CountEntry<String> item : topk) {
 }
 ```
 
----
 
 ## Quantiles
 
@@ -129,7 +127,6 @@ for (double q : quantiles) {
 }
 ```
 
----
 
 ## Cardinality
 
@@ -156,7 +153,6 @@ for (int i=0; i<100; i++) {
 System.out.println("Cardinality: " + card.cardinality());
 ```
 
----
 
 ## Average
 
@@ -180,7 +176,6 @@ for (int i=0; i<100; i++) {
 }
 ```
 
----
 
 ## Membership
 
@@ -209,7 +204,6 @@ for (int i = 0; i < 100; i++) {
 }
 ```
 
----
 
 ## Sampling
 
@@ -242,6 +236,60 @@ for (Integer tuple : stream) {
         // tuple was ignored, move on
     }
 }
+```
+
+
+## Classifiers
+
+### Algorithms
+
+  - Perceptron
+  - NaiveBayes
+  - NaiveBayesWOP
+  - BoundedBayes
+  - LossyBayes
+  - MultiBayes
+  - MultiLossyBayes
+  - MultiTopKBayes
+  - SticySamplingBayes
+  - TopKBayes
+  - MajorityClass
+  - RandomClassifier
+  - MultiRandomClassifier
+
+### Usage
+
+```java
+NaiveBayes nb = new NaiveBayes();
+nb.setLabelAttribute("play");
+            
+ICsvListReader listReader = new CsvListReader(
+        new FileReader("src/test/resources/golf.csv"), 
+        CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
+
+listReader.getHeader(true);
+
+List<String> list;
+while( (list = listReader.read()) != null ) {
+    Data data = new DataImpl();
+    data.put("outlook", list.get(0));
+    data.put("temperature", Integer.parseInt(list.get(1)));
+    data.put("humidity", Integer.parseInt(list.get(2)));
+    data.put("wind", Boolean.parseBoolean(list.get(3)));
+    data.put("play", list.get(4));
+
+    nb.learn(data);
+}
+
+Data test = new DataImpl();
+test.put("outlook", "sunny");
+test.put("temperature", "cool");
+test.put("humidity", "high");
+test.put("windy", "TRUE");
+
+String prediction = nb.predict(test);
+System.out.println("Item is: " + test);
+System.out.println("Prediction is: " + prediction);
 ```
 
 ## References
