@@ -4,10 +4,11 @@ import java.util.TreeSet;
 import org.streaminer.util.hash.Hash;
 
 /**
- *
+ * K-Minimum Values.
+ * Python Source Code: https://github.com/mynameisfiber/countmemaybe
  * @author Maycon Viana Bordin <mayconbordin@gmail.com>
  */
-public class KMinValues {
+public class KMinValues implements IBaseCardinality {
     private TreeSet<Integer> kMin;
     private int k;
     private Hash hasher;
