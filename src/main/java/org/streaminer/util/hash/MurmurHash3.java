@@ -42,8 +42,14 @@ import java.util.Arrays;
  * @since 5.0
  */
 
-public class MurmurHash3 {
+public class MurmurHash3 extends Hash {
    private static final Charset UTF8 = Charset.forName("UTF-8");
+   
+   private static MurmurHash3 _instance = new MurmurHash3();
+  
+    public static Hash getInstance() {
+      return _instance;
+    }
 
    static class State {
       long h1;
@@ -265,6 +271,7 @@ public class MurmurHash3 {
       return (int) (MurmurHash3_x64_128(key, seed)[0] >>> 32);
    }
 
+   @Override
    public int hash(byte[] payload) {
       return MurmurHash3_x64_32(payload, 9001);
    }
@@ -298,4 +305,14 @@ public class MurmurHash3 {
       else
          return hash(o.hashCode());
    }
+   
+   @Override
+    public int hash(byte[] bytes, int length, int initval) {
+        return MurmurHash3_x64_32(bytes, initval);
+    }
+
+    @Override
+    public long hash64(Object o) {
+        return hash64(o, 9001)[0];
+    }
 }
