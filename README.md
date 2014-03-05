@@ -140,6 +140,7 @@ for (double q : quantiles) {
   - CountThenEstimate
   - BJKST [[26]](#ref26)
   - FlajoletMartin [[27]](#ref27)
+  - KMinCount
 
 ### Usage
 
@@ -215,6 +216,9 @@ for (int i = 0; i < 100; i++) {
   - SystematicSampler
   - WRSampler (With Replacement)
   - WeightedRandomSampler
+  - L0Sampler [[30]](#ref30)
+  - SpaceSavingSampler
+  - FrequentSampler
 
 ### Usage
 
@@ -351,3 +355,5 @@ System.out.println("Prediction is: " + prediction);
 `[28]` <a name="ref28"></a>Bianchi, Giuseppe, Nico d'Heureuse, and Saverio Niccolini. "On-demand time-decaying bloom filters for telemarketer detection." ACM SIGCOMM Computer Communication Review 41.5 (2011): 5-12.
 
 `[29]` <a name="ref29"></a>Babcock, Brian, Mayur Datar, and Rajeev Motwani. "Sampling from a moving window over streaming data." Proceedings of the thirteenth annual ACM-SIAM symposium on Discrete algorithms. Society for Industrial and Applied Mathematics, 2002.
+
+`[30]` <a name="ref30"></a>Cormode, Graham, Donatella Firmani, Graham Cormode, and Donatella Firmani. "On Unifying the Space of ℓ0-Sampling Algorithms." In ALENEX, pp. 163-172. 2013.
