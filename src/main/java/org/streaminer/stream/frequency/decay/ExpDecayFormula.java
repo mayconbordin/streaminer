@@ -1,4 +1,4 @@
-package org.streaminer.stream.collection;
+package org.streaminer.stream.frequency.decay;
 
 public class ExpDecayFormula implements DecayFormula {
 
