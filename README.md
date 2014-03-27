@@ -75,7 +75,7 @@ The decay function implements the `DecayFormula` interface. Currently there are
 three implementations: the exponential (`ExpDecayFormula`), the linear (`LinDecayFormula`), 
 and the logarithmic (`LogDecayFormula`).
 
-Those counting algorithms implement a different interaface called `ITimeDecayFrequency`
+Those counting algorithms implement a different interface called `ITimeDecayFrequency`,
 as both methods for adding and estimating the frequency need an additional argument, 
 the timestamp.
 
