@@ -5,11 +5,10 @@ import org.streaminer.stream.frequency.decay.DecayFormula;
 import org.streaminer.util.hash.HashUtils;
 
 /**
- * see: https://github.com/arinto/storm-word-count/blob/master/src/main/java/com/yahoo/swc/bolt/ForwardDecayCountWord.java
- * and: ODTDBloomFilter
- * and: decayhashmap
- * 
- * it is better to update a counter on demand instead of updating all of them at once
+ * Implementaion of a time decaying Count-Min Sketch with values updated on-demand
+ * instead of fixed time intervals. The Count-Min Sketch implementation is from
+ * the CountMinSketchAlt class, originally from the stream-lib. The Decay functions
+ * were obtained from a <a href="https://github.com/michal-harish/streaming-sketches">DecayHashMap implementation</a>.
  */
 public class TimeDecayCountMinSketch implements ITimeDecayFrequency<Object> {
     public static final long PRIME_MODULUS = (1L << 31) - 1;
