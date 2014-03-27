@@ -30,6 +30,11 @@ Maven:
   - StickySampling [[3]](#ref3)
   - RealCounting
   - SimpleTopKCounting
+  - TimeDecayCountMinSketch
+  - TimeDecayRealCounting
+  - AMSSketch
+  - CCFCSketch
+  - CGT
 
 ### Usage
 
@@ -59,6 +64,20 @@ int item = 25;
 long freq = counter.estimateCount(item);
 System.out.println(item + ": " + freq);
 ```
+
+### Time Decaying Algorithms
+
+`TimeDecayRealCounting` and `TimeDecayCountMinSketch` are algorithms that use a 
+decay function to update the current values of their counts in order to give more
+importance to newer values, while older values will slowly fade away.
+
+The decay function implements the `DecayFormula` interface. Currently there are 
+three implementations: the exponential (`ExpDecayFormula`), the linear (`LinDecayFormula`), 
+and the logarithmic (`LogDecayFormula`).
+
+Those counting algorithms implement a different interaface called `ITimeDecayFrequency`
+as both methods for adding and estimating the frequency need an additional argument, 
+the timestamp.
 
 
 ## Top-K
@@ -160,6 +179,7 @@ System.out.println("Cardinality: " + card.cardinality());
 ### Algorithms
 
   - MovingAverage
+  - ExponentialMovingAverage
   - SimpleEWMA
   - VariableEWMA
   - TEWMA [[25]](#ref25)
