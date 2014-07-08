@@ -9,6 +9,7 @@ import java.util.Random;
  *  Ma, Qiang, S. Muthukrishnan, and Mark Sandler. "Frugal Streaming for
  *    Estimating Quantiles." Space-Efficient Data Structures, Streams, and
  *    Algorithms. Springer Berlin Heidelberg, 2013. 77-96.
+ * Available at: http://arxiv.org/abs/1407.1121
  * 
  * Original code: <https://github.com/dgryski/go-frugal>
  * More info: http://blog.aggregateknowledge.com/2013/09/16/sketch-of-the-day-frugal-streaming/
@@ -66,7 +67,9 @@ public class Frugal2U implements IQuantiles<Integer> {
                 return;
             }
             
-            if (s > m && r.nextDouble() > 1-q) {
+            double rnd = r.nextDouble();
+            
+            if (s > m && rnd > 1-q) {
                 step += sign * f(step);
                 
                 if (step > 0) {
@@ -80,12 +83,12 @@ public class Frugal2U implements IQuantiles<Integer> {
                     m = s;
                 }
                 
-                if (sign < 0) {
+                if (sign < 0 && step > 1) {
                     step = 1;
                 }
                 
                 sign = 1;
-            } else if (s < m && r.nextDouble() > q) {
+            } else if (s < m && rnd > q) {
                 step += -sign * f(step);
                 
                 if (step > 0) {
@@ -99,7 +102,7 @@ public class Frugal2U implements IQuantiles<Integer> {
                     m = s;
                 }
                 
-                if (sign > 0) {
+                if (sign > 0 && step > 1) {
                     step = 1;
                 }
                 
