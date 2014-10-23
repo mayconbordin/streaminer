@@ -377,3 +377,26 @@ System.out.println("Prediction is: " + prediction);
 `[29]` <a name="ref29"></a>Babcock, Brian, Mayur Datar, and Rajeev Motwani. "Sampling from a moving window over streaming data." Proceedings of the thirteenth annual ACM-SIAM symposium on Discrete algorithms. Society for Industrial and Applied Mathematics, 2002.
 
 `[30]` <a name="ref30"></a>Cormode, Graham, Donatella Firmani, Graham Cormode, and Donatella Firmani. "On Unifying the Space of ℓ0-Sampling Algorithms." In ALENEX, pp. 163-172. 2013.
+
+## Similar Libraries
+
+  - **Java**
+    - [stream-lib](https://github.com/addthis/stream-lib)
+    - [MOA (Massive Online Analysis)](http://code.google.com/p/moa/)
+    - [stream-mining](https://bitbucket.org/cbockermann/stream-mining)
+    - [jerboa](https://github.com/vandurme/jerboa)
+    - [hoidla](https://github.com/pranab/hoidla)
+  - **Scala**
+    - [algebird](https://github.com/twitter/algebird)
+    - [fleet](https://github.com/noelwelsh/fleet)
+  - **C/C++**
+    - [sketch library](http://hadjieleftheriou.com/sketches/index.html)
+    - [StreamSketch](https://github.com/absolute8511/StreamSketch)
+    - [StreamingAlgorithms](https://github.com/bmoscon/StreamingAlgorithms)
+    - [Streaming-Data-Algorithms](https://github.com/markfuge/Streaming-Data-Algorithms)
+    - [scrunch](https://github.com/jkff/scrunch)
+    - [MassDAL](http://www.cs.rutgers.edu/~muthu/massdal-code-index.html)
+    - [sketches](http://www.cise.ufl.edu/~frusu/code.html)
+  - **JavaScript**
+    - [node-streamcount](https://github.com/jhurliman/node-streamcount)
+    - [node-datastream](https://github.com/mayconbordin/node-datastream)
