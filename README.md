@@ -280,6 +280,10 @@ for (Integer tuple : stream) {
   - MajorityClass
   - RandomClassifier
   - MultiRandomClassifier
+  - AROWClassifier (Adaptive Regularization of Weight Vectors) [[32]](#ref32)
+  - BWinnowClassifier (Balanced Winnow Classifier) [[33]](#ref33)
+  - PAClassifier, MultiClassPAClassifier [[34]](#ref34)
+  - WinnowClassifier
 
 ### Usage
 
@@ -315,6 +319,14 @@ String prediction = nb.predict(test);
 System.out.println("Item is: " + test);
 System.out.println("Prediction is: " + prediction);
 ```
+
+## Clustering
+
+### Algorithms
+  
+  - K-Means
+  - BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) [[31]](#ref31)
+
 
 ## References
 
@@ -377,6 +389,14 @@ System.out.println("Prediction is: " + prediction);
 `[29]` <a name="ref29"></a>Babcock, Brian, Mayur Datar, and Rajeev Motwani. "Sampling from a moving window over streaming data." Proceedings of the thirteenth annual ACM-SIAM symposium on Discrete algorithms. Society for Industrial and Applied Mathematics, 2002.
 
 `[30]` <a name="ref30"></a>Cormode, Graham, Donatella Firmani, Graham Cormode, and Donatella Firmani. "On Unifying the Space of ℓ0-Sampling Algorithms." In ALENEX, pp. 163-172. 2013.
+
+`[31]` <a name="ref31"></a>Zhang, Tian, Raghu Ramakrishnan, and Miron Livny. "BIRCH: an efficient data clustering method for very large databases." ACM SIGMOD Record. Vol. 25. No. 2. ACM, 1996.
+
+`[32]` <a name="ref32"></a>Crammer, Koby, Alex Kulesza, and Mark Dredze. "Adaptive regularization of weight vectors." Advances in Neural Information Processing Systems. 2009.
+
+`[33]` <a name="ref33"></a>Carvalho, Vitor R., and William W. Cohen. "Single-pass online learning: Performance, voting schemes and online feature selection." Proceedings of the 12th ACM SIGKDD international conference on Knowledge discovery and data mining. ACM, 2006.
+
+`[34]` <a name="ref34"></a>Crammer, Koby, Ofer Dekel, Joseph Keshet, Shai Shalev-Shwartz, and Yoram Singer. "Online passive-aggressive algorithms." The Journal of Machine Learning Research 7 (2006): 551-585.
 
 ## Similar Libraries
 

@@ -20,10 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.streaminer.util.math.MathUtil;
 
-/**
- *
- * @author mayconbordin
- */
 public class WinnowClassifier extends SimpleClassifier<Boolean> {
     private static final Logger LOG = LoggerFactory.getLogger(WinnowClassifier.class);
     private static final long serialVersionUID = -5163481593640555140L;
