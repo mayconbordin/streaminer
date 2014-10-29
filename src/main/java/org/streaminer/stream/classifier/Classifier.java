@@ -15,7 +15,6 @@ import org.streaminer.stream.model.PredictionModel;
  * @author Christian Bockermann &lt;chris@jwall.org&gt;
  *
  */
-public interface Classifier<D, T> 
-	extends PredictionModel<D, T>, Learner<D, PredictionModel<D, T>> {
+public interface Classifier<D, T> extends PredictionModel<D, T>, Learner<D, PredictionModel<D, T>> {
 
 }

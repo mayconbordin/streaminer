@@ -12,13 +12,13 @@ package org.streaminer.stream.model;
  */
 public interface PredictionModel<T, R> extends Model {
 	
-	/**
-	 * <p>
-	 * This method returns a prediction for the given input.
-	 * </p>
-	 * 
-	 * @param item to predict for
-	 * @return	a prediction for the given item
-	 */
-	R predict(T item);	
+    /**
+     * <p>
+     * This method returns a prediction for the given input.
+     * </p>
+     * 
+     * @param item to predict for
+     * @return	a prediction for the given item
+     */
+    public R predict(T item);	
 }

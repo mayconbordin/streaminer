@@ -18,39 +18,37 @@ import org.streaminer.stream.model.PredictionModel;
  * @param <C> The label type, i.e. the Java class of the predicted outcome.
  * 
  */
-public abstract class AbstractClassifier<D,C> 
-	implements Classifier<D,C>
-{
-	/** The unique class ID */
-	private static final long serialVersionUID = -8809157061575037435L;
+public abstract class AbstractClassifier<D,C> implements Classifier<D,C> {
+    /** The unique class ID */
+    private static final long serialVersionUID = -8809157061575037435L;
 
 
-	/**
-	 * @see stream.learner.Learner#getModel()
-	 */
-	@Override
-	public final PredictionModel<D, C> getModel() {
-		return this;
-	}
-	
-	
-	/**
-	 * @see stream.learner.Learner#init()
-	 */
-	public void init(){
-	}
-	
-	
-	/**
-	 * @see stream.model.PredictionModel#predict(java.lang.Object)
-	 */
-	@Override
-	public abstract C predict(D item);
-	
+    /**
+     * @see stream.learner.Learner#getModel()
+     */
+    @Override
+    public final PredictionModel<D, C> getModel() {
+        return this;
+    }
 
-	/**
-	 * @see stream.learner.Learner#learn(java.lang.Object)
-	 */
-	@Override
-	public abstract void learn(D item);
+
+    /**
+     * @see stream.learner.Learner#init()
+     */
+    public void init(){
+    }
+
+
+    /**
+     * @see stream.model.PredictionModel#predict(java.lang.Object)
+     */
+    @Override
+    public abstract C predict(D item);
+
+
+    /**
+     * @see stream.learner.Learner#learn(java.lang.Object)
+     */
+    @Override
+    public abstract void learn(D item);
 }
