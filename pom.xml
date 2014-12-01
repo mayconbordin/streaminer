@@ -3,7 +3,7 @@
 
     <groupId>com.github.mayconbordin</groupId>
     <artifactId>streaminer</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
     <name>streaminer</name>
     <description>A collection of algorithms for mining data streams</description>
