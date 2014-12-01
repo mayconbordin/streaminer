@@ -38,30 +38,38 @@ public class TimeDecayCountMinSketchTest
 
         double epsOfTotalCount = 0.0001;
         double confidence = 0.99;
-        DecayFormula decay = new ExpDecayFormula(60 * 60);
+        DecayFormula decay = new ExpDecayFormula(24 * 60 * 60);
 
         TimeDecayCountMinSketch sketch = new TimeDecayCountMinSketch(epsOfTotalCount, confidence, seed, decay);
-        TimeDecayRealCounting<Integer> real = new TimeDecayRealCounting<Integer>(decay);
-        for (int x : xs) {
-            long timestamp = System.currentTimeMillis();
+        TimeDecayRealCounting<Integer> realDecay = new TimeDecayRealCounting<Integer>(decay);
+        RealCounting<Integer> real = new RealCounting<Integer>();
+        
+        long timestamp = 0;
+        for (int i=0; i<xs.length; i++) {
+            int x = xs[i];
+            //long timestamp = System.currentTimeMillis();
+            if (i%100 == 0 && i != 0)
+                timestamp += 10000;
+            
             sketch.add(x, 1, timestamp);
-            real.add(x, 1, timestamp);
+            realDecay.add(x, 1, timestamp);
+            real.add(x);
         }
 
 
         int numErrors = 0;
-        for (int i = 0; i < real.size(); ++i)
+        for (int i = 0; i < realDecay.size(); ++i)
         {
-            long timestamp = System.currentTimeMillis();
-            double ratio = 1.0 * (sketch.estimateCount(i, timestamp) - real.estimateCount(i, timestamp)) / xs.length;
+            timestamp += 10000;//System.currentTimeMillis();
+            double ratio = 1.0 * (sketch.estimateCount(i, timestamp) - realDecay.estimateCount(i, timestamp)) / xs.length;
             if (ratio > 1.0001)
             {
                 numErrors++;
             }
             
-            //System.out.println(String.format("%d\t%f\t%f", i, real.estimateCount(i, timestamp), sketch.estimateCount(i, timestamp)));
+            System.out.println(String.format("%d\t%d\t%f\t%f", i, real.estimateCount(i), realDecay.estimateCount(i, timestamp), sketch.estimateCount(i, timestamp)));
         }
-        double pCorrect = 1 - 1.0 * numErrors / real.size();
+        double pCorrect = 1 - 1.0 * numErrors / realDecay.size();
         assertTrue("Confidence not reached: required " + confidence + ", reached " + pCorrect, pCorrect > confidence);
     }
 
