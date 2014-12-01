@@ -39,7 +39,29 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- If you want to build from an IDE like IDEA or Eclipse and use GnuPG version >= v2.0,
+        set the parameter to true in order to get a nice GUI dialog for entering the passphrase.
+        If you want to build from a console, set it to false or override it via -DgpgGuiPassphrase=false. -->
+        <gpgGuiPassphrase>false</gpgGuiPassphrase>
+
+        <!-- If you have multiple GnuPG signing keys on your keyring, the first one is used as the default key.
+        In order to use another one, specify the desired key ID here, otherwise you may just leave the parameter
+        empty or override it via -DgpgKeyId=. It does not hurt to
+        always specify it, though. -->
+        <gpgKeyId>6136F51A</gpgKeyId>
     </properties>
+    
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
   
     <repositories>
         <repository>
@@ -142,6 +164,26 @@
     
     <build>
         <plugins>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.4</version>
+                <configuration>
+                    <useAgent>${gpgGuiPassphrase}</useAgent>
+                    <keyname>${gpgKeyId}</keyname>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
             <!-- MAVEN RELEASE -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
