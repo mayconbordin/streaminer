@@ -32,7 +32,7 @@ import org.streaminer.util.hash.Hash;
  * Based on implementation by Damian Gryski (github.com/dgryski/go-entropy).
  * @author mayconbordin
  */
-public class EntropySketch {
+public class EntropySketch implements IEntropy {
     private int count;
     private double[] data;
     private final Hash hasher;

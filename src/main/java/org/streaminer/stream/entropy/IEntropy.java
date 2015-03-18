@@ -24,34 +24,11 @@
 
 package org.streaminer.stream.entropy;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  *
  * @author mayconbordin
  */
-public class EntropyExact implements IEntropy {
-    private Map<String, Double> data;
-
-    public EntropyExact() {
-        data = new HashMap<String, Double>();
-    }
-    
-    public void push(byte[] b, int inc) {
-        data.put(Arrays.toString(b), (double)inc);
-    }
-    
-    public double entropy() {
-        int hm = 0;
-        double size = 0.0;
-        
-        for (double c : data.values()) {
-            size += c;
-            hm += c * (Math.log(c) / Math.log(2));
-        }
-        
-        return (Math.log(size) / Math.log(2)) - hm/size;
-    }
+public interface IEntropy {
+    public void push(byte[] b, int inc);
+    public double entropy();
 }
