@@ -64,6 +64,8 @@ public abstract class Hash {
       return MurmurHash.getInstance();
     case MURMUR_HASH3:
       return MurmurHash3.getInstance();
+    case SPOOKY_HASH:
+      return SpookyHash.getInstance();
     default:
       return null;
     }

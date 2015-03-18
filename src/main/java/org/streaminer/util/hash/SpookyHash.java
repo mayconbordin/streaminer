@@ -5,6 +5,12 @@ package org.streaminer.util.hash;
  * @author mayconbordin
  */
 public class SpookyHash extends Hash {
+    
+    private static SpookyHash _instance = new SpookyHash();
+  
+    public static Hash getInstance() {
+      return _instance;
+    }
 
     @Override
     public int hash(byte[] bytes, int length, int seed) {
