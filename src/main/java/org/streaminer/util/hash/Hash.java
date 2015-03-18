@@ -30,6 +30,8 @@ public abstract class Hash {
   /** Constant to denote {@link MurmurHash3}. */
   public static final int MURMUR_HASH3  = 2;
   
+  public static final int SPOOKY_HASH  = 3;
+  
   /**
    * This utility method converts String representation of hash function name
    * to a symbolic constant. Currently two function types are supported,
@@ -67,25 +69,33 @@ public abstract class Hash {
     }
   }
   
+  protected static long seedLong() {
+      return System.nanoTime();
+  }
+  
+  protected static int seedInt() {
+      return ((Long)System.nanoTime()).hashCode();
+  }
+  
   /**
    * Calculate a hash using all bytes from the input argument, and
-   * a seed of -1.
+   * current time as seed.
    * @param bytes input bytes
    * @return hash value
    */
   public int hash(byte[] bytes) {
-    return hash(bytes, bytes.length, -1);
+    return hash(bytes, bytes.length, seedInt());
   }
   
   /**
    * Calculate a hash using all bytes from the input argument,
    * and a provided seed value.
    * @param bytes input bytes
-   * @param initval seed value
+   * @param seed seed value
    * @return hash value
    */
-  public int hash(byte[] bytes, int initval) {
-    return hash(bytes, bytes.length, initval);
+  public int hash(byte[] bytes, int seed) {
+    return hash(bytes, bytes.length, seed);
   }
   
   /**
@@ -93,10 +103,41 @@ public abstract class Hash {
    * the provided seed value
    * @param bytes input bytes
    * @param length length of the valid bytes to consider
-   * @param initval seed value
+   * @param seed seed value
    * @return hash value
    */
-  public abstract int hash(byte[] bytes, int length, int initval);
+  public abstract int hash(byte[] bytes, int length, int seed);
+  
+  /**
+   * Calculate a hash using all bytes from the input argument, and
+   * a seed of -1.
+   * @param bytes input bytes
+   * @return hash value
+   */
+  public long hash64(byte[] bytes) {
+    return hash64(bytes, bytes.length, seedInt());
+  }
+  
+  /**
+   * Calculate a hash using all bytes from the input argument,
+   * and a provided seed value.
+   * @param bytes input bytes
+   * @param seed seed value
+   * @return hash value
+   */
+  public long hash64(byte[] bytes, int seed) {
+    return hash64(bytes, bytes.length, seed);
+  }
+  
+  /**
+   * Calculate a hash using bytes from 0 to <code>length</code>, and
+   * the provided seed value
+   * @param bytes input bytes
+   * @param length length of the valid bytes to consider
+   * @param seed seed value
+   * @return hash value
+   */
+  public abstract long hash64(byte[] bytes, int length, int seed);
   
   public abstract int hash(Object o);
   public abstract long hash64(Object o);

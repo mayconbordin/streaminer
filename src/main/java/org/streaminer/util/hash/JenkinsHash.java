@@ -386,4 +386,9 @@ public class JenkinsHash extends Hash {
 
       return (int)(c & INT_MASK);
     }
+
+    @Override
+    public long hash64(byte[] bytes, int length, int seed) {
+        return hash64(bytes);
+    }
 }

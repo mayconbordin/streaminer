@@ -315,4 +315,9 @@ public class MurmurHash3 extends Hash {
     public long hash64(Object o) {
         return hash64(o, 9001)[0];
     }
+    
+    @Override
+    public long hash64(byte[] bytes, int length, int seed) {
+        return hash64(bytes, seed);
+    }
 }

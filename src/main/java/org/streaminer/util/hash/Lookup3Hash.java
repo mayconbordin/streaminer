@@ -45,8 +45,7 @@ package org.streaminer.util.hash;
  *
  * @author yonik
  */
-public class Lookup3Hash
-{
+public class Lookup3Hash extends Hash {
     /**
      * A Java implementation of hashword from lookup3.c by Bob Jenkins
      * (<a href="http://burtleburtle.net/bob/c/lookup3.c">original source</a>).
@@ -335,6 +334,45 @@ public class Lookup3Hash
     public static long lookup3ycs64(CharSequence s)
     {
         return lookup3ycs64(s, 0, s.length(), -1);
+    }
+
+    @Override
+    public int hash(byte[] bytes, int length, int seed) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public long hash64(byte[] bytes, int length, int seed) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hash(Object o) {
+        if (o == null) {
+            return 0;
+        } else if (o instanceof String) {
+            String s = ((String) o);
+            return lookup3ycs(s, 0, s.length(), seedInt());
+        } else if (o instanceof int[]) {
+            int[] i = (int[])o;
+            return lookup3(i, 0, i.length, seedInt());
+        }
+
+        String s = o.toString();
+        return lookup3ycs(s, 0, s.length(), seedInt());
+    }
+
+    @Override
+    public long hash64(Object o) {
+        if (o == null) {
+            return 0;
+        } else if (o instanceof String) {
+            String s = ((String) o);
+            return lookup3ycs64(s, 0, s.length(), seedInt());
+        }
+
+        String s = o.toString();
+        return lookup3ycs64(s, 0, s.length(), seedInt());
     }
 
 }
