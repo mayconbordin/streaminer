@@ -1,5 +1,6 @@
 Streaminer
 ==========
+[![Download](https://api.bintray.com/packages/mayconbordin/maven/streaminer/images/download.svg)](https://bintray.com/mayconbordin/maven/streaminer/_latestVersion)
 
 A collection of algorithms for mining data streams, including frequent itemsets, quantiles, sampling, moving averages, set membership and cardinality.
 
