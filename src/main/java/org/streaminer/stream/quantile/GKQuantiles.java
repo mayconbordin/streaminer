@@ -49,7 +49,7 @@ public class GKQuantiles implements IQuantiles<Double> {
             throw new RuntimeException("An appropriate epsilon value must lay between 0 and 1.");
         }
         
-        this.epsilon = epsilon;
+        setEpsilon(epsilon);
     }
     
     public void setEpsilon(double epsilon) {
