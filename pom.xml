@@ -200,7 +200,8 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <executions>
+                <extensions>true</extensions>    
+		<executions>
                     <execution>
                         <phase>process-classes</phase>
                         <goals>
